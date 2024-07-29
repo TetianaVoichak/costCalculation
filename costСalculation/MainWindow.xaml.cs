@@ -20,11 +20,25 @@ namespace costСalculation
     /// </summary>
     public partial class MainWindow : Window
     {
+        //ApplicationContext db;
+        public List<Category> CATEGORYLIST { get; set; } = Data.GetCategories();
+        public List<InfoForDay> INFOFORDAYLIST { get; set; } = Data.GetInfoForDay();
         public MainWindow()
         {
             InitializeComponent();
             textBox_info_current_date.Text = "Today is " + DateTime.Now.Date.ToShortDateString();
-            List<Category> categList = new List<Category>();
+
+            foreach (var a in CATEGORYLIST)
+               comboBox_category.Items.Add(a.NameCategory);
+
+
+
+            datePickerMain.Text = DateTime.Now.Date.ToString();
+            datePickerSetDate.Text = DateTime.Now.Date.ToString();
+
+            LoadInfoForDay();
+
+            /*
             Category cat = new Category("makeup");
             categList.Add(cat);
             cat = new Category("ware");
@@ -34,23 +48,63 @@ namespace costСalculation
             foreach (var a in categList)
                 comboBox_category.Items.Add(a.NameCategory);
             datePickerMain.Text = DateTime.Now.Date.ToString();
-            datePickerSetDate.Text = DateTime.Now.Date.ToString();
+            datePickerSetDate.Text = DateTime.Now.Date.ToString();*/
         }
 
+        //загружаем информацию данной даты в формы / load information of this date into forms
+        void InfoCurrentDayinForm(DateTime date)
+        {
+            costsOf = new costsOfDay();
+            List<InfoForDay> infoList = new List<InfoForDay>();
+            costsOf.CheckDate(date, out infoList);
+            costsOf.InfoCurrentDay(date, infoList);
+        }
+
+        
+        void LoadInfoForDay()
+        {
+            INFOFORDAYLIST = Data.GetInfoForDay();
+            InfoCurrentDayinForm(DateTime.Now);
+
+        }
+
+
+
         costsOfDay costsOf = new costsOfDay();
+
+
 
         private void button_add_money_to_this_category_Click(object sender, RoutedEventArgs e)
         {
             Category category = new Category(comboBox_category.SelectedItem.ToString());
-            costsOf.AddInList(new InfoForDay(datePickerSetDate.SelectedDate.Value, category, decimal.Parse(textBox_cash.Text)));
+            costsOf.AddInList(new InfoForDay( datePickerSetDate.SelectedDate.Value, category, decimal.Parse(textBox_cash.Text)));
             methodCheckDate(datePickerSetDate.SelectedDate.Value);
-            comboBox_category_choose.SelectedIndex = 0;  
+            //costsOf.CheckDate(datePickerSetDate.SelectedDate.Value, out tempList);
+
+        
+            comboBox_category_choose.SelectedIndex = 0; 
         }
+
+
         List<InfoForDay> tempList;
         private decimal totalAmountForTheDay(DateTime d, List<InfoForDay> list)
         {
            return costsOf.AmountInDay(d, list);
         }
+
+        //fill in the date information in the form und show
+        void fillShowInfotheDateinForm(DateTime d, List<InfoForDay> tempList)
+        {
+            textBox_total_amount_this_day.Text = costsOf.AmountInDay(d, tempList).ToString();
+            var result = tempList.GroupBy(p => new { p.Category1.NameCategory });
+
+
+            foreach (var a in result)
+                comboBox_category_choose.Items.Add(a.Key.NameCategory);
+            textBox_total_amount.Text = tempList[comboBox_category_choose.SelectedIndex].Money.ToString();
+        }
+
+       
 
         //method allow to know List of selected Day
         private void methodCheckDate(DateTime d)
@@ -60,16 +114,12 @@ namespace costСalculation
             comboBox_category_choose.Items.Clear();
             tempList = new List<InfoForDay>();
             List<Category> categ = new List<Category>();
-           
-            if (costsOf.CheckDate(d, out tempList) && (datePickerSetDate.SelectedDate.Value == datePickerMain.SelectedDate.Value))
+            comboBox_category_choose.SelectedIndex = 0;
+            if(costsOf.CheckDate(d, out tempList))// && (datePickerSetDate.SelectedDate.Value == datePickerMain.SelectedDate.Value))
             {
-                textBox_total_amount_this_day.Text = costsOf.AmountInDay(d, tempList).ToString();
-                var result = tempList.GroupBy(p => new { p.Category1.NameCategory });
-              
-                foreach (var a in result)
-                    comboBox_category_choose.Items.Add(a.Key.NameCategory);
-            }
-          
+                fillShowInfotheDateinForm(d, tempList);
+                datePickerMain.Text = d.ToString();
+            }        
             comboBox_category_choose.SelectedIndex = 0;
         }
 
@@ -78,11 +128,18 @@ namespace costСalculation
         {
             try
             {
+                List<InfoForDay> listInfoForDayCurrent = new List<InfoForDay>();
                 methodCheckDate(datePickerMain.SelectedDate.Value);
-            }
-            catch { }    
-        }
+                listInfoForDayCurrent = costsOf.InfoCurrentDayListCategory(datePickerMain.SelectedDate.Value, INFOFORDAYLIST, CATEGORYLIST);
 
+                InfoCurrentDayinForm(datePickerMain.SelectedDate.Value);
+
+
+            }
+            catch(Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }    
+        }
 
         private void methodCheckDateAndCategory(DateTime d, Category c)
         {
@@ -90,23 +147,55 @@ namespace costСalculation
             if (costsOf.CheckCategory(d, c,  out tempList))
             {
                 textBox_total_amount.Text = costsOf.AmoutByCategory(tempList, c).ToString();
-                //textBox_total_amount_this_day.Text = costsOf.AmountInDay(d, tempList).ToString();
             }
         }
         private void comboBox_category_choose_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             try
             {
                 if (comboBox_category_choose.Items.Count > 0)
                 {
+                    
                     Category cat = new Category(comboBox_category_choose.SelectedItem.ToString());
                     methodCheckDateAndCategory(datePickerMain.SelectedDate.Value, cat);
+
+
+
                 }
             }
             catch
             {
 
             }
+        }
+
+        public void UpdateInfoInComboboxCategory()
+        {
+            
+            CATEGORYLIST = Data.GetCategories();
+            comboBox_category.Items.Clear();
+            foreach (var a in CATEGORYLIST)
+                comboBox_category.Items.Add(a.NameCategory);
+            comboBox_category.SelectedIndex = 0;
+        }
+
+        private void button_add_new_category_Click(object sender, RoutedEventArgs e)
+        {
+            Window_add_category window_Add_Category = new Window_add_category();
+            window_Add_Category.Owner = this;
+            window_Add_Category.ShowDialog();
+        }
+
+        //in dem Feld "how much did you spend in this category?" zeigt den Wert
+        private void methodValueFirstOfCombobox(int index)
+        {
+
+        }
+
+        private void comboBox_category_choose_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+             //methodValueFirstOfCombobox(comboBox_category_choose.SelectedIndex);
         }
     }
 }

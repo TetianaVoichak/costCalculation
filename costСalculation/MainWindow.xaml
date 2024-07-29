@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:costСalculation"
         mc:Ignorable="d"
         Title="MainWindow" Height="460" Width="974">
+    <Window.DataContext>
+        <Binding RelativeSource="{RelativeSource Self}"/>
+    </Window.DataContext>
     <Grid Margin="0,0,27,0" Height="407" VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition Height="127*"/>
@@ -17,7 +20,8 @@
         <Button x:Name="button_add_money_to_this_category" Content="+" HorizontalAlignment="Left" Margin="27,0,0,80" VerticalAlignment="Bottom" Height="67" Width="325" FontSize="36" Click="button_add_money_to_this_category_Click" Grid.Row="1"/>
         <ComboBox x:Name="comboBox_category" HorizontalAlignment="Left" Margin="27,105,0,0" VerticalAlignment="Top" Width="325" Height="57" Grid.RowSpan="2" FontSize="18" SelectedIndex="0"/>
         <Label Content="Euro" HorizontalAlignment="Left" Margin="287,65,0,0" Grid.Row="1" VerticalAlignment="Top" Height="62" Width="67" FontSize="18"/>
-        <ComboBox x:Name="comboBox_category_choose" HorizontalAlignment="Left" Margin="532,63,0,0" VerticalAlignment="Top" Width="282" Height="54" RenderTransformOrigin="0.5,0.5" Grid.Row="1" SelectionChanged="comboBox_category_choose_SelectionChanged" SelectedIndex="0">
+        <ComboBox x:Name="comboBox_category_choose"  HorizontalAlignment="Left" Margin="532,63,0,0" VerticalAlignment="Top" Width="282" Height="54" RenderTransformOrigin="0.5,0.5" Grid.Row="1" SelectionChanged="comboBox_category_choose_SelectionChanged" SelectedIndex="0" IsVisibleChanged="comboBox_category_choose_IsVisibleChanged">
+            <!--ItemsSource="{Binding CATEGORYLIST}"-->
             <ComboBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -35,6 +39,7 @@
         <Label Content="Сategory" HorizontalAlignment="Left" Margin="527,25,0,0" VerticalAlignment="Top" Width="188" Grid.Row="1"/>
         <Label Content="how much did you spend in this category?" HorizontalAlignment="Left" Margin="527,74,0,0" VerticalAlignment="Top" Width="303"/>
         <Label Content="how much did you spend per day?" HorizontalAlignment="Left" Margin="527,128,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Button x:Name="button_add_new_category" Content="+ new category" HorizontalAlignment="Left" Height="35" Margin="370,116,0,0" VerticalAlignment="Top" Width="92" Grid.RowSpan="2" Click="button_add_new_category_Click"/>
 
     </Grid>
 </Window>

@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace costСalculation
 {
-    class InfoForDay
+    public class InfoForDay
     {
+        [Key]
+        public int idInfo { get; set; }
+        public int idCategory { get; set; }
         DateTime date;
-        Category category;
+        Category category ;
         decimal money;
+
+
+     
         public DateTime Date
         {
             get
             {
                 return date;
             }
-            set { Date = value; }
-
+            set { date = value; }
         }
 
         public Category Category1
@@ -28,7 +34,7 @@ namespace costСalculation
 
             set
             {
-                Category1 = category;
+                category = value;
             }
         }
 
@@ -40,20 +46,25 @@ namespace costСalculation
             }
             set
             {
-                Money = money;
+                money = value;
             }
         }
 
         public InfoForDay()
         {
-
+            category = new Category();
         }
-        public InfoForDay(DateTime date, Category category, decimal money)
+        public InfoForDay(DateTime _date, Category _category, decimal _money)
         {
-            this.date = date;
-            this.category = category;
-            this.money = money;
-
+            date = _date;
+            category = _category;
+            money = _money;
+        }
+        public InfoForDay(DateTime _date, decimal _money, int _idcategory)
+        {
+              date = _date;
+              idCategory = _idcategory;
+            money = _money;
         }
 
     }
