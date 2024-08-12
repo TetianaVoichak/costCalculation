@@ -24,14 +24,13 @@ namespace costСalculation
 
             }
         }
+
         //suchen, ob schon diese "Category" in der Liste gibt
         public static bool CheckCategory(Category cat)
         {
-
             bool temp = false;
             using (var ctx = new DataContext())
             {
-
                 var count = ctx.Categories
                   .Where(c => c.NameCategory.ToLower() == cat.NameCategory.ToLower()).Count();
 
@@ -39,6 +38,7 @@ namespace costСalculation
             }
             return temp;
         }
+
         public static void AddCategory(Category category, out string message)
         {
             if (!CheckCategory(category))
@@ -124,8 +124,29 @@ namespace costСalculation
 
 
         }
+        
+
+        public static void AddInfo(InfoForDay info )
+        {
+            InfoForDayAdditionalClass infoAdd = new InfoForDayAdditionalClass();
+           // infoAdd.idInfo = info.idInfo;
+            infoAdd.Date = info.Date.ToString();
+            infoAdd.Money = info.Money;
+            infoAdd.idCategory = info.Category1.idCategory;
+            //infoAdd.idCategory = info.idCategory;
+
+                using (var ctx = new DataContext())
+                {
+                    
+                        ctx.InfoForDayAdditionalClassList.Add(infoAdd);
+                        ctx.SaveChanges();
+                }
+
+            }
+
+        }
     }
-}
+
 
     
 

@@ -24,8 +24,7 @@ namespace costСalculation
             set { nameCategory = value; }
 
         }
-        
-        
+
         public Category()
         {
 
@@ -39,7 +38,6 @@ namespace costСalculation
             idCategory = index;
             nameCategory = name;
         }
-
 
     }
        

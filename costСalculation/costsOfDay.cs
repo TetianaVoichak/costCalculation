@@ -8,6 +8,15 @@ namespace costСalculation
      class costsOfDay
     {
         List<InfoForDay> listForDay = new List<InfoForDay>();
+        public costsOfDay()
+        {
+
+        }
+
+        public costsOfDay(List<InfoForDay> list)
+        {
+            listForDay = list;
+        }
 
         //method that returns the amount per day
          decimal Sum(InfoForDay forDay)
@@ -26,7 +35,7 @@ namespace costСalculation
             listForDay.Remove(item);
         }
 
-       public  bool  CheckDate(DateTime d, out List<InfoForDay> tempList)
+       public bool CheckDate(DateTime d, out List<InfoForDay> tempList)
        {
             bool check = false;
             tempList = new List<InfoForDay>();
@@ -70,51 +79,39 @@ namespace costСalculation
         {
             List<InfoForDay> listInfoCurrentDay = new List<InfoForDay>();
             var newListCategoryCurrentDay = from info in listI
-                                    join category in categoryList on info.idCategory equals category.idCategory
+                                    join category in categoryList on info.idCategory equals category.idCategory where info.Date == date
                                     select new InfoForDay
                                     {
-
                                         idInfo = info.idInfo,
                                         Date = info.Date,
                                         Money = info.Money,
                                         Category1 = new Category(category.idCategory, category.NameCategory)
- 
                                     };
             foreach(var info in newListCategoryCurrentDay)
             {
                 listInfoCurrentDay.Add(info);
             }
-
             return listInfoCurrentDay;
-
         }
 
 
         public  void InfoCurrentDay(DateTime date, List<InfoForDay> listI)
         {
+           
             var newList = from info in listI
                           join InfoForDay in listI
                           on info.idCategory equals InfoForDay.idCategory
                           group info by new InfoForDay
                           {
-
                               idInfo = info.idInfo,
                               Date = info.Date,
                               Money = info.Money,
                               idCategory = info.idCategory
                           };
 
-
-            /*
-            List<InfoForDay> listInfoResult = new List<InfoForDay>();
-
-            foreach(var i in newList)
-            {
-                listInfoResult.Add(i);
-            }
-            return listInfoResult;
-            */
-               
+            //List<InfoForDay> listInfoResult = new List<InfoForDay>();
+            //listInfoResult = newList;
+            //listResult = new List<InfoForDay>();
 
         }
 
