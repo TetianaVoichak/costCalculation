@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
 
 namespace costСalculation
 {
@@ -50,9 +52,6 @@ namespace costСalculation
             List<InfoForDay> infoList = new List<InfoForDay>();
 
             costsOf.InfoCurrentDay(date, list);//???
-           // List<InfoForDay> infoForDayResult = new List<InfoForDay>();
-           // infoForDayResult = costsOf.InfoCurrentDayListCategory(date, list, CATEGORYLIST);
-           // fillShowInfotheDateinForm(date, infoForDayResult);
 
             costsOf.CheckDate(date, out infoList);
             costsOf.InfoCurrentDay(date, infoList);
@@ -62,52 +61,81 @@ namespace costСalculation
         }
 
 
-        void LoadInfoForDay()
+        void LoadInfoForDay(DateTime date)
         {
             List<InfoForDay> listInfoForDayCurrent = new List<InfoForDay>();
             INFOFORDAYLIST = Data.GetInfoForDay();
             listInfoForDayCurrent = costsOf.InfoCurrentDayListCategory(datePickerMain.SelectedDate.Value, INFOFORDAYLIST, CATEGORYLIST);
-            //_initialDate = null;
-            InfoCurrentDayinForm(DateTime.Today, listInfoForDayCurrent);
+            InfoCurrentDayinForm(date, listInfoForDayCurrent);
         }
         
 
 
         costsOfDay costsOf = new costsOfDay();
+        decimal money;//a variable that stores money
 
+        //check and convert text to currency format
+        void workWithMoneyFromTxt()
+        {
+            string str_money = textBox_cash.Text.Trim();
+            // Заменяем точку на запятую, если точка используется в качестве десятичного разделителя
+            str_money = str_money.Replace('.', ',');
+
+            // Пробуем преобразовать строку в decimal
+            if (decimal.TryParse(str_money, NumberStyles.Any, CultureInfo.CurrentCulture, out decimal result))
+            {
+                money = result;
+            }
+            else
+            {
+                // Сообщаем об ошибке
+                MessageBox.Show("Invalid number format");
+                money = 0;
+            }
+
+        }
 
         //save info new day
         private void button_add_money_to_this_category_Click(object sender, RoutedEventArgs e)
         {
-           //Category category = new Category(comboBox_category.SelectedItem.ToString());
-            WorkingWithCategories workingCategory = new WorkingWithCategories(CATEGORYLIST);
+            try
+            {
+                WorkingWithCategories workingCategory = new WorkingWithCategories(CATEGORYLIST);
+
+                bool check = false;
+                workingCategory.ReturnCategoryMethod(comboBox_category.SelectedItem.ToString(), out check);
+                Category categForInfo;
+                categForInfo = workingCategory.ReturnCategory;
+                if (check == true)
+                {
+                    workWithMoneyFromTxt();
+                    if(money > 0)
+                    {
+                            InfoForDay info = new InfoForDay(datePickerSetDate.SelectedDate.Value, categForInfo,money);
+                            Data.AddInfo(info);
+
+                            LoadInfoForDay(datePickerMain.SelectedDate.Value);
+                              money = 0;
+                        MessageBox.Show("data saved successfully");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid number format");
+                        money = 0;
+                    }
+  
+                }
+                else
+                {
+                    MessageBox.Show("Kann nicht zur Datenbank hinzugefügt werden");
+                }
+            }
+           catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
             
-            bool check = false;
-            workingCategory.ReturnCategoryMethod(comboBox_category.SelectedItem.ToString(), out check);
-            Category categForInfo;
-            categForInfo = workingCategory.ReturnCategory;
-            if (check == true)
-            {
-              
-                InfoForDay info = new InfoForDay(datePickerSetDate.SelectedDate.Value, categForInfo, decimal.Parse(textBox_cash.Text));
-                Data.AddInfo(info);
-
-                LoadInfoForDay();
-            }
-            else
-            {
-                MessageBox.Show("Kann nicht zur Datenbank hinzugefügt werden");
-            }
-
-            /*
-            costsOf.AddInList(new InfoForDay(datePickerSetDate.SelectedDate.Value, category, decimal.Parse(textBox_cash.Text)));
-
-            methodCheckDate(datePickerSetDate.SelectedDate.Value);
-            //costsOf.CheckDate(datePickerSetDate.SelectedDate.Value, out tempList);
-
-            comboBox_category_choose.SelectedIndex = 0;
-
-            */       
         }
 
         List<InfoForDay> tempList;
@@ -140,7 +168,7 @@ namespace costСalculation
 
             List<Category> categ = new List<Category>();
             comboBox_category_choose.SelectedIndex = 0;
-            if(costsOf.CheckDate(d, out tempList))// && (datePickerSetDate.SelectedDate.Value == datePickerMain.SelectedDate.Value))
+            if(costsOf.CheckDate(d, out tempList))
             {
                 fillShowInfotheDateinForm(d, tempList);
                 datePickerMain.Text = d.ToString();
@@ -159,10 +187,7 @@ namespace costСalculation
                     _initialDate = currentDay;
                     List<InfoForDay> listInfoForDayCurrent = new List<InfoForDay>();
                     List<InfoForDay> newList = new List<InfoForDay>();
-                    //methodCheckDate(datePickerMain.SelectedDate.Value);
                     listInfoForDayCurrent = costsOf.InfoCurrentDayListCategory(datePickerMain.SelectedDate.Value, INFOFORDAYLIST, CATEGORYLIST);
-                    //  costsOf = new costsOfDay(listInfoForDayCurrent);
-                    // costsOf.CheckDate(datePickerMain.SelectedDate.Value, out newList);
                     InfoCurrentDayinForm(datePickerMain.SelectedDate.Value, listInfoForDayCurrent);
 
                 }
@@ -188,7 +213,7 @@ namespace costСalculation
             {
                 if (comboBox_category_choose.Items.Count > 0)
                 {
-                    //здесь ошибка
+                    //здесь ошибка??
                     Category cat = new Category(comboBox_category_choose.SelectedItem.ToString());
                     methodCheckDateAndCategory(datePickerMain.SelectedDate.Value, cat);
                 }

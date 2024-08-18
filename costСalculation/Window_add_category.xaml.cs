@@ -41,15 +41,30 @@ namespace costСalculation
 
         private void button_save_new_Click(object sender, RoutedEventArgs e)
         {
-            string mes = "";
-            Category c = new Category(textBox_new_category.Text);
-            Data.AddCategory(c,out mes);
-            if (mes != "") MessageBox.Show(mes);
-            else
+            try
             {
-                LoadCategoryInCombobox();
-                textBox_new_category.Text = "";
+                string mes = "";
+                if (textBox_new_category.Text != "")
+                {
+                    Category c = new Category(textBox_new_category.Text);
+                    Data.AddCategory(c, out mes);
+                    if (mes != "") MessageBox.Show(mes);
+                    else
+                    {
+                        LoadCategoryInCombobox();
+                        textBox_new_category.Text = "";
+                    }
+                }
+                else 
+                {
+                    MessageBox.Show("cannot be added"); 
+                }
             }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.ToString());
+            }
+          
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
