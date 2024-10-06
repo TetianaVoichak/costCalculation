@@ -1,3 +1,3 @@
 Application for managing expenses
 
-WPF
+WPF, Entity Framework, SQLite 
