@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:costСalculation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="460" Width="974">
+        Title="CostCalculation" Height="460" Width="974">
     <Window.DataContext>
         <Binding RelativeSource="{RelativeSource Self}"/>
     </Window.DataContext>
