@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:costСalculation"
         mc:Ignorable="d"
-        Title="CostCalculation" Height="460" Width="974">
+        Title="CostCalculation" Height="460" Width="974" >
     <Window.DataContext>
         <Binding RelativeSource="{RelativeSource Self}"/>
     </Window.DataContext>
-    <Grid Margin="0,0,27,0" Height="407" VerticalAlignment="Top">
+    <Grid Margin="0,0,27,0" Height="407" VerticalAlignment="Top" Background="Azure" >
         <Grid.RowDefinitions>
             <RowDefinition Height="127*"/>
             <RowDefinition Height="305*"/>
@@ -19,7 +19,7 @@
         <TextBox x:Name="textBox_cash" HorizontalAlignment="Left" Height="62" Margin="27,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" FontSize="18" Grid.Row="1"/>
         <Button x:Name="button_add_money_to_this_category" Content="+" HorizontalAlignment="Left" Margin="27,0,0,80" VerticalAlignment="Bottom" Height="67" Width="325" FontSize="36" Click="button_add_money_to_this_category_Click" Grid.Row="1"/>
         <ComboBox x:Name="comboBox_category" HorizontalAlignment="Left" Margin="27,105,0,0" VerticalAlignment="Top" Width="325" Height="57" Grid.RowSpan="2" FontSize="18" SelectedIndex="0"/>
-        <Label Content="Euro" HorizontalAlignment="Left" Margin="287,65,0,0" Grid.Row="1" VerticalAlignment="Top" Height="62" Width="67" FontSize="18"/>
+        <Label Content="Euro" HorizontalAlignment="Left" Margin="275,73,0,0" Grid.Row="1" VerticalAlignment="Top" Height="62" Width="67" FontSize="18"/>
         <ComboBox x:Name="comboBox_category_choose"  HorizontalAlignment="Left" Margin="532,63,0,0" VerticalAlignment="Top" Width="282" Height="54" RenderTransformOrigin="0.5,0.5" Grid.Row="1" SelectionChanged="comboBox_category_choose_SelectionChanged" SelectedIndex="0" IsVisibleChanged="comboBox_category_choose_IsVisibleChanged">
             <!--ItemsSource="{Binding CATEGORYLIST}"-->
             <ComboBox.RenderTransform>
@@ -33,13 +33,19 @@
         </ComboBox>
         <TextBox x:Name="textBox_total_amount_this_day" HorizontalAlignment="Left" Margin="527,154,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Height="38" IsEnabled="False"/>
         <DatePicker x:Name="datePickerMain" HorizontalAlignment="Left" Margin="527,23,0,63" Width="274" SelectedDateChanged="datePickerMain_SelectedDateChanged" />
-        <TextBox x:Name="textBox_total_amount" HorizontalAlignment="Left" Height="35" Margin="527,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284" Grid.RowSpan="2" IsEnabled="False"/>
+        <TextBox x:Name="textBox_total_amount" HorizontalAlignment="Left" Height="35" Margin="527,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Grid.RowSpan="2" IsEnabled="False"/>
         <DatePicker x:Name="datePickerSetDate" HorizontalAlignment="Left" Height="40" Margin="27,24,0,0" VerticalAlignment="Top" Width="325"/>
         <Label Content="Сategory" HorizontalAlignment="Left" Margin="27,74,0,0" VerticalAlignment="Top" Width="188"/>
         <Label Content="Сategory" HorizontalAlignment="Left" Margin="527,25,0,0" VerticalAlignment="Top" Width="188" Grid.Row="1"/>
         <Label Content="how much did you spend in this category?" HorizontalAlignment="Left" Margin="527,74,0,0" VerticalAlignment="Top" Width="303"/>
         <Label Content="how much did you spend per day?" HorizontalAlignment="Left" Margin="527,128,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Button x:Name="button_add_new_category" Content="+ new category" HorizontalAlignment="Left" Height="35" Margin="370,116,0,0" VerticalAlignment="Top" Width="92" Grid.RowSpan="2" Click="button_add_new_category_Click"/>
+        <Button x:Name="button_edit" Content="Edit" HorizontalAlignment="Left" Margin="833,24,0,59" Width="94" Cursor="" Click="button_edit_Click"/>
+        <Button x:Name="button_save_edit" Content="Save" HorizontalAlignment="Left" Height="38" Margin="835,74,0,0" VerticalAlignment="Top" Width="94" Click="button_save_edit_Click" IsEnabled="False" RenderTransformOrigin="0.521,-1.174"/>
+        <Button x:Name="button_delete" Content="Delete" HorizontalAlignment="Left" Height="39" Margin="837,59,0,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Click="button_delete_Click"/>
+        <Button x:Name="button_delete_category" Content="Delete category" HorizontalAlignment="Left" Margin="837,7,0,0" Width="94" Click="button_delete_category_Click" IsEnabled="False" Height="38" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label Content="Euro" HorizontalAlignment="Left" Margin="812,154,0,0" Grid.Row="1" VerticalAlignment="Top" Height="62" Width="68" FontSize="18"/>
+        <Label Content="Euro" HorizontalAlignment="Left" Margin="748,103,0,0" VerticalAlignment="Top" Height="62" Width="68" FontSize="18" Grid.RowSpan="2"/>
 
     </Grid>
 </Window>

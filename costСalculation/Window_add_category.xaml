@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:costСalculation"
         mc:Ignorable="d"
         Title="New category" Height="215" Width="499" Closing="Window_Closing">
-    <Grid Height="192" VerticalAlignment="Top" Margin="0,0,10,0">
+    <Grid Height="192" VerticalAlignment="Top" Margin="0,0,10,0" Background="Azure">
 
         <TextBox x:Name="textBox_new_category" Height="40" Margin="31,45,36,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="textBox_new_category_TextChanged" Grid.Column="1" Grid.ColumnSpan="2"/>
         <Label Content="Input new category" HorizontalAlignment="Left" Margin="31,15,0,0" VerticalAlignment="Top" Width="213" Grid.Column="1" Grid.ColumnSpan="2"/>
