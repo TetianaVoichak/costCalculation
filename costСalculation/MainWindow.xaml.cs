@@ -22,7 +22,7 @@ namespace costСalculation
     /// </summary>
     public partial class MainWindow : Window
     {
-        //ApplicationContext db;
+       
         public List<Category> CATEGORYLIST { get; set; } = Data.GetCategories();
         public List<InfoForDay> INFOFORDAYLIST { get; set; } = Data.GetInfoForDay();
 
@@ -51,11 +51,10 @@ namespace costСalculation
             costsOf = new costsOfDay(list);
             List<InfoForDay> infoList = new List<InfoForDay>();
 
-            costsOf.InfoCurrentDay(date, list);//???
+            //costsOf.InfoCurrentDay(date, list);//???
 
-            costsOf.CheckDate(date, out infoList);
-            costsOf.InfoCurrentDay(date, infoList);
-
+            //costsOf.CheckDate(date, out infoList);
+            //costsOf.InfoCurrentDay(date, infoList);
             methodCheckDate(date);
 
         }
@@ -101,6 +100,8 @@ namespace costСalculation
         {
             try
             {
+                if(comboBox_category.Items.Count>0)
+                {
                 Category categForInfo;
                 if (workingWithCategoryMethod(out categForInfo, comboBox_category.SelectedItem.ToString()) == true)
                 {
@@ -126,6 +127,9 @@ namespace costСalculation
                 {
                     MessageBox.Show("Cannot be added to the database");
                 }
+                }
+                else { MessageBox.Show("need to add category"); }
+              
             }
             catch (Exception ex)
             {
@@ -189,7 +193,6 @@ namespace costСalculation
                     List<InfoForDay> newList = new List<InfoForDay>();
                     listInfoForDayCurrent = costsOf.InfoCurrentDayListCategory(datePickerMain.SelectedDate.Value, INFOFORDAYLIST, CATEGORYLIST);
                     InfoCurrentDayinForm(datePickerMain.SelectedDate.Value, listInfoForDayCurrent);
-
                 }
 
             }
@@ -294,8 +297,7 @@ namespace costСalculation
                     Category categForInfo;
                     if (workingWithCategoryMethod(out categForInfo, comboBox_category_choose.SelectedItem.ToString()) == true)
                     {
-                        //Category category = new Category();
-                        //category = categForInfo;
+
                         money = workWithMoneyFromTxt(textBox_total_amount.Text);
                         if (money > 0)
                         {
@@ -343,7 +345,6 @@ namespace costСalculation
                         if (workingWithCategoryMethod(out categForInfo, comboBox_category_choose.SelectedItem.ToString()) == true)
                         {
                             InfoForDay info = new InfoForDay(datePickerMain.SelectedDate.Value, categForInfo, money);
-                           
                             Data.DeleteDate(info);
                             LoadInfoForDay(datePickerMain.SelectedDate.Value);
                             money = 0;
@@ -411,6 +412,31 @@ namespace costСalculation
                 MessageBox.Show(ex.ToString());
             }
 
+        }
+
+        private void button_analytics_Click(object sender, RoutedEventArgs e)
+        {
+            WindowDiagram windowDiagram = new WindowDiagram();
+            windowDiagram.Owner = this; ;
+            windowDiagram.ShowDialog();
+        }
+        void CleanTextBox(object sender)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox != null)
+            {
+                textBox.Clear();
+            }
+        }
+
+        private void textBox_cash_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CleanTextBox(sender);
+        }
+
+        private void textBox_total_amount_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CleanTextBox(sender);
         }
     }
 

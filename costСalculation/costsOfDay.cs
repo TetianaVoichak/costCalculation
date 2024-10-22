@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Windows.Shell;
 
 namespace costСalculation
 {
@@ -62,8 +63,9 @@ namespace costСalculation
 
             return check;
         }
-        
-        public  decimal AmoutByCategory(List<InfoForDay> listforAmount, Category c)
+
+        //сумма по конкретной категории / amount for a specific category
+        public decimal AmoutByCategory(List<InfoForDay> listforAmount, Category c)
         {
             decimal amount = 0;
             foreach (var a in listforAmount)
@@ -74,8 +76,8 @@ namespace costСalculation
             return amount;
         }
 
-        //отображает категории выбранной даты / displays the categories of the selected date
-        public  List<InfoForDay> InfoCurrentDayListCategory(DateTime date, List<InfoForDay> listI, List<Category> categoryList)
+        //возвращает данные по дате сделав выборку по категории выбранной даты / returns data by date by selecting by the category of the selected date
+        public List<InfoForDay> InfoCurrentDayListCategory(DateTime date, List<InfoForDay> listI, List<Category> categoryList)
         {
             List<InfoForDay> listInfoCurrentDay = new List<InfoForDay>();
             var newListCategoryCurrentDay = from info in listI
@@ -95,9 +97,9 @@ namespace costСalculation
         }
 
 
-        public  void InfoCurrentDay(DateTime date, List<InfoForDay> listI)
+           void InfoCurrentDay(DateTime date, List<InfoForDay> listI)
         {
-           
+
             var newList = from info in listI
                           join InfoForDay in listI
                           on info.idCategory equals InfoForDay.idCategory
@@ -109,13 +111,9 @@ namespace costСalculation
                               idCategory = info.idCategory
                           };
 
-            //List<InfoForDay> listInfoResult = new List<InfoForDay>();
-            //listInfoResult = newList;
-            //listResult = new List<InfoForDay>();
-
         }
-
-        public  decimal AmountInDay(DateTime d, List<InfoForDay> listforAmountD)
+        //сумма денег за день общая / total amount of money per day
+        public decimal AmountInDay(DateTime d, List<InfoForDay> listforAmountD)
         {
             decimal amount = 0;
             foreach (var a in listforAmountD)
@@ -126,12 +124,94 @@ namespace costСalculation
             return amount;
         }
 
-        public  void AddIncrement(InfoForDay ifd)
+        //находим года какие существуют в базе / to find the years that exist in the list
+        public List<int> FindYear(List<InfoForDay> listI)
+        { 
+            List<int> newListYear = (from info in listI
+                              group info by info.Date.Year into yearGroup
+                              select yearGroup.Key).ToList();
+            return newListYear;
+        }
+
+        //поиск дней в опредленном году / search for days in a given year
+        public List<InfoForDay> FindDaysFromYear(int year)
         {
 
-           
+            /** List<InfoForDay> newList = (from info in listForDay
+                                        where info.Date.Year == year
+                                        select info).ToList();.*/
+
+
+            List<InfoForDay> newList = (from info in listForDay
+                                        where info.Date.Year == year
+                                        select info).ToList();
+
+            
+
+            return newList;
         }
 
 
+        //отдает список дат определенного года и месяца / gives a list of dates for a specific year and month
+        public List<InfoForDay> FindDaysFromYearsMonths(int month, int year)
+        {
+            List<InfoForDay> newList = (from info in listForDay
+                                        where info.Date.Month == month && info.Date.Year == year
+                                        select info).ToList();
+            return newList;
+        }
+
+
+        //поиск месяцев / search months
+        public List<int> FindMonthsFromInfo(List<InfoForDay> informationdate)
+        {
+            List<int> newListMonths = (from info in informationdate
+                                       group info by info.Date.Month into monthGroup
+                            select monthGroup.Key).ToList();
+            return newListMonths;
+        }
+
+        //the method returns the amount for each category of a specific month
+        //метод возврщает сумму по каждой категории определенного месяца
+        public List<CategorySum> ResultListSumMoneyFromMonthCategory(List<InfoForDay> list, List<Category> categoryList)
+        {
+
+            List<CategorySum> categorySum = (from info in list
+                                                 group info by info.idCategory into categoryGroup
+                                                 join category in categoryList on categoryGroup.Key equals category.idCategory
+                                                 select new CategorySum
+                                                 {
+                                                     CategoryId = categoryGroup.Key,
+                                                     TotalSum = categoryGroup.Sum(info => info.Money),
+                                                     Name = category.NameCategory 
+                                                 }).ToList();
+
+            return categorySum;
+            /*
+             List<CategorySum> categorySum = (from info in list
+                                      group info by info.idCategory into categoryGroup
+                                      select new CategorySum
+                                      {
+                                          CategoryId = categoryGroup.Key,
+                                          TotalSum = categoryGroup.Sum(info => info.Money)
+                                      }).ToList();
+            return categorySum;
+             */
+        }
+
+
+
+
+        /*
+        public decimal SumMonth(List<InfoForDay> listInfoMonth,)
+        {
+            foreach (var info in listInfoMonth) {
+            AmountInDay(d, tempList).ToString();
+            var result = tempList.GroupBy(p => new { p.Category1.NameCategory });
+        }
+        */
+
+
+
     }
-}
+    }

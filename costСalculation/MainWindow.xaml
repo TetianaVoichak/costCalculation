@@ -16,24 +16,24 @@
         </Grid.RowDefinitions>
         <TextBox x:Name="textBox_info_current_date" HorizontalAlignment="Left" Margin="299,234,0,10" TextWrapping="Wrap" Width="327" IsReadOnly="True" FontSize="18" Grid.Row="1"/>
 
-        <TextBox x:Name="textBox_cash" HorizontalAlignment="Left" Height="62" Margin="27,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" FontSize="18" Grid.Row="1"/>
+        <TextBox x:Name="textBox_cash" HorizontalAlignment="Left" Height="62" Margin="27,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" FontSize="18" Grid.Row="1" PreviewMouseDown="textBox_cash_PreviewMouseDown"/>
         <Button x:Name="button_add_money_to_this_category" Content="+" HorizontalAlignment="Left" Margin="27,0,0,80" VerticalAlignment="Bottom" Height="67" Width="325" FontSize="36" Click="button_add_money_to_this_category_Click" Grid.Row="1"/>
         <ComboBox x:Name="comboBox_category" HorizontalAlignment="Left" Margin="27,105,0,0" VerticalAlignment="Top" Width="325" Height="57" Grid.RowSpan="2" FontSize="18" SelectedIndex="0"/>
         <Label Content="Euro" HorizontalAlignment="Left" Margin="275,73,0,0" Grid.Row="1" VerticalAlignment="Top" Height="62" Width="67" FontSize="18"/>
-        <ComboBox x:Name="comboBox_category_choose"  HorizontalAlignment="Left" Margin="532,63,0,0" VerticalAlignment="Top" Width="282" Height="54" RenderTransformOrigin="0.5,0.5" Grid.Row="1" SelectionChanged="comboBox_category_choose_SelectionChanged" SelectedIndex="0" IsVisibleChanged="comboBox_category_choose_IsVisibleChanged">
+        <ComboBox x:Name="comboBox_category_choose"  HorizontalAlignment="Left" Margin="531,63,0,0" VerticalAlignment="Top" Width="277" Height="56"  Grid.Row="1" SelectionChanged="comboBox_category_choose_SelectionChanged" SelectedIndex="0" IsVisibleChanged="comboBox_category_choose_IsVisibleChanged" FontSize="18">
             <!--ItemsSource="{Binding CATEGORYLIST}"-->
             <ComboBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-0.534"/>
+                    <RotateTransform Angle="-0.023"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </ComboBox.RenderTransform>
         </ComboBox>
         <TextBox x:Name="textBox_total_amount_this_day" HorizontalAlignment="Left" Margin="527,154,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" Height="38" IsEnabled="False"/>
         <DatePicker x:Name="datePickerMain" HorizontalAlignment="Left" Margin="527,23,0,63" Width="274" SelectedDateChanged="datePickerMain_SelectedDateChanged" />
-        <TextBox x:Name="textBox_total_amount" HorizontalAlignment="Left" Height="35" Margin="527,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Grid.RowSpan="2" IsEnabled="False"/>
+        <TextBox x:Name="textBox_total_amount" HorizontalAlignment="Left" Height="35" Margin="527,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="205" Grid.RowSpan="2" IsEnabled="False" PreviewMouseDown="textBox_total_amount_PreviewMouseDown"/>
         <DatePicker x:Name="datePickerSetDate" HorizontalAlignment="Left" Height="40" Margin="27,24,0,0" VerticalAlignment="Top" Width="325"/>
         <Label Content="Сategory" HorizontalAlignment="Left" Margin="27,74,0,0" VerticalAlignment="Top" Width="188"/>
         <Label Content="Сategory" HorizontalAlignment="Left" Margin="527,25,0,0" VerticalAlignment="Top" Width="188" Grid.Row="1"/>
@@ -46,6 +46,7 @@
         <Button x:Name="button_delete_category" Content="Delete category" HorizontalAlignment="Left" Margin="837,7,0,0" Width="94" Click="button_delete_category_Click" IsEnabled="False" Height="38" VerticalAlignment="Top" Grid.Row="1"/>
         <Label Content="Euro" HorizontalAlignment="Left" Margin="812,154,0,0" Grid.Row="1" VerticalAlignment="Top" Height="62" Width="68" FontSize="18"/>
         <Label Content="Euro" HorizontalAlignment="Left" Margin="748,103,0,0" VerticalAlignment="Top" Height="62" Width="68" FontSize="18" Grid.RowSpan="2"/>
+        <Button x:Name="button_analytics" Content="Analytics" HorizontalAlignment="Left" Height="38" Margin="837,231,0,0" Grid.Row="1" VerticalAlignment="Top" Width="94" Click="button_analytics_Click"/>
 
     </Grid>
 </Window>

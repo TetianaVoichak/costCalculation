@@ -1,0 +1,35 @@
+﻿<Window x:Class="costСalculation.WindowDiagram"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:costСalculation"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="Analytics" Height="450" Width="1200" Background="Azure">
+    <Grid Margin="10,0,0,-6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="420*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="button_Diagram" Content="Diagram" HorizontalAlignment="Left" Margin="19,166,0,0" VerticalAlignment="Top" Height="35" Width="149" Click="button_Diagram_Click" Grid.Row="1"/>
+        <ComboBox x:Name="comboBox_months"  HorizontalAlignment="Left" Margin="19,107,0,0" VerticalAlignment="Top" Width="149" Height="35" SelectedIndex="0" Grid.Row="1"/>
+        <ComboBox x:Name="combobox_year" HorizontalAlignment="Left" Margin="19,36,0,0" VerticalAlignment="Top" Width="149" Height="34" SelectedIndex="0" SelectionChanged="combobox_year_SelectionChanged" Grid.Row="1"/>
+        <Label Content="Select year" HorizontalAlignment="Left" Margin="19,6,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="67"/>
+        <Label Content="Select month" HorizontalAlignment="Left" Height="27" Margin="19,75,0,0" VerticalAlignment="Top" Width="96" Grid.Row="1"/>
+        <lvc:CartesianChart x:Name="barChart" Margin="180,22,25,0" Height="302" Width="900" VerticalAlignment="Top" Series="{Binding CollectionCategory}" Grid.Row="1">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Categories" LabelsRotation="45"  Labels="{Binding Labels}" >
+                    <lvc:Axis.Separator>
+                        <lvc:Separator Step="1" />
+                    </lvc:Axis.Separator>
+                </lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Values"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
+        <Label x:Name="resultMoney" Content="Label" HorizontalAlignment="Left" Margin="29,324,0,0" Grid.Row="1" VerticalAlignment="Top" Height="47" Width="660" FontSize="18" FontWeight="Bold" Foreground="#FFFF4E00"/>
+    </Grid>
+</Window>

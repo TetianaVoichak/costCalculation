@@ -78,10 +78,29 @@ namespace costСalculation
 
         private void button_delete_Click(object sender, RoutedEventArgs e)
         {
-            Category c = new Category(comboBoxList.SelectedItem.ToString());
-            Data.DeleteCategory(c);
-            LoadCategoryInCombobox();
-            MessageBox.Show("item deleted successfully");
+            try
+            {
+                WorkingWithCategories workingCateg = new WorkingWithCategories(CATEGORYLIST);
+                bool check = false;
+                workingCateg.ReturnCategoryMethod(comboBoxList.SelectedItem.ToString(), out check);
+                string msg = "";
+                Data.DeleteCategory(workingCateg.ReturnCategory, out msg);
+                if(msg=="")
+                {
+                        LoadCategoryInCombobox();
+                        MessageBox.Show("Item deleted successfully");    
+                }
+                else
+                {
+                    MessageBox.Show(msg);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+           
         }
     }
 }

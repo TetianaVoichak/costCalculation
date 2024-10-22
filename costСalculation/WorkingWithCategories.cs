@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Controls.Primitives;
 
 namespace costСalculation
 {
@@ -53,6 +54,12 @@ namespace costСalculation
                     ReturnCategory = a;
                     return;
                 }
+        }
+
+       
+        public void DefinitionOfTheSelectedCategory( Category categoryOut, string categFromUser)
+        {
+
         }
     }
 }

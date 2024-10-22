@@ -21,7 +21,6 @@ namespace costСalculation
                 {
                     list.Add(c);
                 }
-
                 return list;
 
             }
@@ -57,15 +56,35 @@ namespace costСalculation
 
         }
 
-        public static void DeleteCategory(Category category)
+        private static bool CheckIfTheCategoryIsFound(Category category)
         {
-            using (var ctx = new DataContext())
+            foreach (var info in GetInfoForDay())
             {
-                var element = ctx.Categories
-                  .Where(c => c.NameCategory == category.NameCategory).FirstOrDefault();
-                ctx.Categories.Remove(element);
-                ctx.SaveChanges();
+                if (info.idCategory == category.idCategory)
+                    return true;
+                 
             }
+            return false;
+        }
+
+        public static void DeleteCategory(Category category, out string msg)
+        {
+            if (!CheckIfTheCategoryIsFound(category))
+            {
+                using (var ctx = new DataContext())
+                {
+                    var element = ctx.Categories
+                      .Where(c => c.NameCategory == category.NameCategory).First();
+                    ctx.Categories.Remove(element);
+                    ctx.SaveChanges();
+                    msg = "";
+                }
+            }
+            else
+            {
+                 msg = "Unable to delete. This category is in use.";
+            }
+               
         }
 
         //convert string to date from database and write to list
@@ -75,14 +94,8 @@ namespace costСalculation
             using (var ctx = new DataContext())
             {
 
-                // var listDate = ctx.InfoForDays.Select(x => new { x.idInfo, x.Date }).ToList();
-
-                //return listDate;
-
             }
         }
-
-
 
         public static List<InfoForDay> GetInfoForDay()
         {
@@ -90,7 +103,6 @@ namespace costСalculation
 
             using (var ctx = new DataContext())
             {
-
                 // Считываем данные из базы данных в промежуточный класс /  Read data from the database into the intermediate class
                 var dataFromDb = ctx.Set<InfoForDayAdditionalClass>().ToList();
 
@@ -122,8 +134,6 @@ namespace costСalculation
 
                 return listI;
             }
-
-
 
         }
 
@@ -234,8 +244,15 @@ namespace costСalculation
             }
         }
 
-
-
+        //find year
+        public static void FindYear(InfoForDay infoDays)
+        {
+            using(var ctx = new DataContext())
+            {
+                InfoForDayAdditionalClass infoFindYear = new InfoForDayAdditionalClass();
+                infoFindYear.Date = infoDays.Date.ToString();
+            }
+        }
 
 
     }
