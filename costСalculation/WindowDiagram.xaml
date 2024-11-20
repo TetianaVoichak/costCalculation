@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:costСalculation"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="Analytics" Height="450" Width="1200" Background="Azure">
+        Title="Analytics" Height="500" Width="1300" Background="Azure">
     <Grid Margin="10,0,0,-6">
         <Grid.RowDefinitions>
             <RowDefinition Height="13*"/>
@@ -18,7 +18,7 @@
         <ComboBox x:Name="combobox_year" HorizontalAlignment="Left" Margin="19,36,0,0" VerticalAlignment="Top" Width="149" Height="34" SelectedIndex="0" SelectionChanged="combobox_year_SelectionChanged" Grid.Row="1"/>
         <Label Content="Select year" HorizontalAlignment="Left" Margin="19,6,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="67"/>
         <Label Content="Select month" HorizontalAlignment="Left" Height="27" Margin="19,75,0,0" VerticalAlignment="Top" Width="96" Grid.Row="1"/>
-        <lvc:CartesianChart x:Name="barChart" Margin="180,22,25,0" Height="302" Width="900" VerticalAlignment="Top" Series="{Binding CollectionCategory}" Grid.Row="1">
+        <lvc:CartesianChart x:Name="barChart" Margin="180,22,25,0" Height="302" Width="1100" VerticalAlignment="Top" Series="{Binding CollectionCategory}" Grid.Row="1">
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Title="Categories" LabelsRotation="45"  Labels="{Binding Labels}" >
                     <lvc:Axis.Separator>

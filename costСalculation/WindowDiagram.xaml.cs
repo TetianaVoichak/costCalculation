@@ -112,7 +112,8 @@ namespace costСalculation
                      {
                             int index = (int)point.X; // Получаем индекс текущего столбца // Get the index of the current column
                             decimal amountInEuro = categorySum[index].TotalSum; // Получаем соответствующую сумму /receive the corresponding amount
-                            return $"{categorySum[index].Name}\n{amountInEuro:F2} Euro"; 
+                           // return $"{categorySum[index].Name}\n{amountInEuro:F2} Euro";
+                         return $"{amountInEuro:F2} Euro";
                        },
                 }
             };
@@ -141,6 +142,7 @@ namespace costСalculation
                 {
                     Labels = labelsWithPercentage,
                     LabelsRotation = 45,
+                    Foreground = Brushes.Black,
                     Separator = new LiveCharts.Wpf.Separator { Step = 1 } 
                 });
             }

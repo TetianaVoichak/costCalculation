@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Windows.Controls.Primitives;
 
@@ -20,7 +21,7 @@ namespace costСalculation
             {
                     categories = list;
             }
-       
+       public WorkingWithCategories(Category c) { returnCategory = c; }
 
         public void AddInList(Category item)
         {
@@ -55,8 +56,22 @@ namespace costСalculation
                     return;
                 }
         }
-
-       
+        //проверка на корректность введенных данных, строка не должна быть больше 20 , у свойства в классе Category это атрибут
+        public bool ValidateCategory(Category category, out string error)
+        {
+            error = null;
+            var context = new ValidationContext(category); 
+            var results = new List<ValidationResult>();
+            if (!Validator.TryValidateObject(category, context, results, true))
+            {
+                foreach (var validationResult in results)
+                {
+                    error = validationResult.ErrorMessage;
+                }
+                return false;
+            }
+            return true;
+        }
         public void DefinitionOfTheSelectedCategory( Category categoryOut, string categFromUser)
         {
 

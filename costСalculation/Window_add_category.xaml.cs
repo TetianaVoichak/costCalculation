@@ -19,6 +19,7 @@ namespace costСalculation
     {
         List<Category> listCategory = new List<Category>();
         public List<Category> CATEGORYLIST { get; set; } = Data.GetCategories();
+        
         public Window_add_category()
         {
             InitializeComponent();
@@ -43,22 +44,22 @@ namespace costСalculation
         {
             try
             {
-                string mes = "";
-                if (textBox_new_category.Text != "")
-                {
+                    string mes = null;
                     Category c = new Category(textBox_new_category.Text);
+                    WorkingWithCategories workingWith = new WorkingWithCategories(c);
+                    string error = null;
+                    if (!workingWith.ValidateCategory(c, out error))// проверка на корректность данных / checking for data correctness
+                    {
+                        MessageBox.Show(error);
+                        return;
+                    }
                     Data.AddCategory(c, out mes);
-                    if (mes != "") MessageBox.Show(mes);
+                    if (mes != null) MessageBox.Show(mes);
                     else
                     {
                         LoadCategoryInCombobox();
                         textBox_new_category.Text = "";
                     }
-                }
-                else 
-                {
-                    MessageBox.Show("cannot be added"); 
-                }
             }
             catch (Exception ex) 
             {

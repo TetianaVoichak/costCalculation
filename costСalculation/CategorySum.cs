@@ -14,5 +14,6 @@ namespace costСalculation
 
       public string Name { get; set; }
         public int percent { get; set; }
+
     }
 }

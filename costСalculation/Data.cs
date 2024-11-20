@@ -48,7 +48,7 @@ namespace costСalculation
                 {
                     ctx.Categories.Add(category);
                     ctx.SaveChanges();
-                    message = "";
+                    message = null;
                 }
 
             }
