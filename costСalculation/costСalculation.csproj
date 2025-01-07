@@ -3,7 +3,6 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
-	  <PublishSingleFile>true</PublishSingleFile>
 	  <SelfContained>true</SelfContained>
 	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
 	  <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
