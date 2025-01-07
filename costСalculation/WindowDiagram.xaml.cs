@@ -70,7 +70,7 @@ namespace costСalculation
                 foreach (var y in YEARS)
                     combobox_year.Items.Add(y);
 
-                combobox_year.SelectedItem = YEARS[YEARS.Count - 1];
+               if(YEARS.Count > 0) combobox_year.SelectedItem = YEARS[YEARS.Count - 1];
 
                 VisibilityDiagramAndRun();
 
