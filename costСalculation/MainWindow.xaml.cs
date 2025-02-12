@@ -83,7 +83,15 @@ namespace costСalculation
             // Пробуем преобразовать строку в decimal / change to decimal from string
             if (decimal.TryParse(strMoneyTrim, NumberStyles.Any, CultureInfo.CurrentCulture, out decimal result))
             {
-                money = result;
+                if (result >= 0 && result <= 1000000)
+                {
+                    money = result;
+                }
+                else
+                {
+                    MessageBox.Show("The amount must be between 0 and 1,000,000.");
+                    money = 0;
+                }
             }
             else
             {
