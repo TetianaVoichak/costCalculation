@@ -5,10 +5,6 @@
 
 **Instructions**
 
-download archive
-
-unzip
-
-to open only the application CostCalculation, you need to unzip the folder **CostCalculateAppv1** and run the exe file **CostCalculation.exe**
-
-to view the entire project, open in the standard way
+Download the archive.
+Unzip the archive.
+To run the application, extract the folder CostCalculationVersion2_0_1.zip and execute the file costCalculation.exe.
