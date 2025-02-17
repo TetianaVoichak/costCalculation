@@ -47,6 +47,7 @@
         <Label Content="Euro" HorizontalAlignment="Left" Margin="812,154,0,0" Grid.Row="1" VerticalAlignment="Top" Height="62" Width="68" FontSize="18"/>
         <Label Content="Euro" HorizontalAlignment="Left" Margin="748,103,0,0" VerticalAlignment="Top" Height="62" Width="68" FontSize="18" Grid.RowSpan="2"/>
         <Button x:Name="button_analytics" Content="Analytics" HorizontalAlignment="Left" Height="38" Margin="837,231,0,0" Grid.Row="1" VerticalAlignment="Top" Width="94" Click="button_analytics_Click"/>
+        <CheckBox x:Name="checkBoxMonthlyPayment" Content="make payment monthly" HorizontalAlignment="Left" Margin="36,222,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

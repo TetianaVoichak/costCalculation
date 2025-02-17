@@ -6,6 +6,7 @@ using System.Linq;
 using System.Data.Entity;
 using System.Resources;
 using System.Windows.Interop;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace costСalculation
 {
@@ -34,6 +35,19 @@ namespace costСalculation
             {
                 var count = ctx.Categories
                   .Where(c => c.NameCategory.ToLower() == cat.NameCategory.ToLower()).Count();
+
+                if (count > 0) temp = true;
+            }
+            return temp;
+        }
+
+        public static bool CheckCategoryName(string catName)
+        {
+            bool temp = false;
+            using (var ctx = new DataContext())
+            {
+                var count = ctx.Categories
+                  .Where(c => c.NameCategory.ToLower() == catName.ToLower()).Count();
 
                 if (count > 0) temp = true;
             }
@@ -253,6 +267,31 @@ namespace costСalculation
                 infoFindYear.Date = infoDays.Date.ToString();
             }
         }
+
+        public static void EditCategory(Category category, string newNameCateg, out string message)
+        {
+            message = null;
+            if (!CheckCategoryName(newNameCateg))
+            {
+
+                using (var ctx = new DataContext())
+                {
+
+                    var categoryToUpdate = ctx.Categories.FirstOrDefault(c => c.idCategory == category.idCategory);
+                    if (categoryToUpdate != null)
+                    {
+                        categoryToUpdate.NameCategory = newNameCateg;
+                        ctx.SaveChanges();
+                        message = null;
+                    }
+
+                }
+            }
+            else message = "Element exists";
+           
+            }
+         
+        
 
 
     }

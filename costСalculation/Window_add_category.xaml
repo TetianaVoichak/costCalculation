@@ -12,7 +12,8 @@
         <Label Content="Input new category" HorizontalAlignment="Left" Margin="31,15,0,0" VerticalAlignment="Top" Width="213" Grid.Column="1" Grid.ColumnSpan="2"/>
         <Button x:Name="button_save_new" Content="Save" Margin="31,95,36,0" VerticalAlignment="Top" Height="36" Click="button_save_new_Click"/>
         <ComboBox x:Name="comboBoxList" HorizontalAlignment="Left" Margin="31,140,0,0" VerticalAlignment="Top" Width="233" SelectedIndex="0" Height="32"/>
-        <Button x:Name="button_delete" Content="Delete" HorizontalAlignment="Left" Margin="284,140,0,0" VerticalAlignment="Top" Width="169" Height="32" Click="button_delete_Click"/>
+        <Button x:Name="button_delete" Content="Delete" HorizontalAlignment="Left" Margin="378,140,0,0" VerticalAlignment="Top" Width="75" Height="32" Click="button_delete_Click"/>
+        <Button x:Name="buttonEdit" Content="Edit" HorizontalAlignment="Left" Margin="291,140,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.01,-0.529" Width="68" Height="31" Click="buttonEdit_Click"/>
 
     </Grid>
 </Window>

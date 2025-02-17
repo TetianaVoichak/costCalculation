@@ -39,6 +39,17 @@ namespace costСalculation
         {
            
         }
+        /*// проверка на корректность данных / checking for data correctness
+        void CheckingForDataCorrectness(Category c, WorkingWithCategories workingWith)
+        {
+            string error = null;
+            if (!workingWith.ValidateCategory(c, out error))// проверка на корректность данных / checking for data correctness
+            {
+                MessageBox.Show(error);
+                return;
+            }
+
+        }*/
 
         private void button_save_new_Click(object sender, RoutedEventArgs e)
         {
@@ -53,13 +64,15 @@ namespace costСalculation
                         MessageBox.Show(error);
                         return;
                     }
+
                     Data.AddCategory(c, out mes);
                     if (mes != null) MessageBox.Show(mes);
                     else
                     {
                         LoadCategoryInCombobox();
                         textBox_new_category.Text = "";
-                    }
+                        MessageBox.Show("The item has been added successfully.");
+                }
             }
             catch (Exception ex) 
             {
@@ -84,7 +97,7 @@ namespace costСalculation
                 WorkingWithCategories workingCateg = new WorkingWithCategories(CATEGORYLIST);
                 bool check = false;
                 workingCateg.ReturnCategoryMethod(comboBoxList.SelectedItem.ToString(), out check);
-                string msg = "";
+                string msg = null;
                 Data.DeleteCategory(workingCateg.ReturnCategory, out msg);
                 if(msg=="")
                 {
@@ -102,6 +115,50 @@ namespace costСalculation
                 MessageBox.Show(ex.ToString());
             }
            
+        }
+
+        private void buttonEdit_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Do you want to edit the selected category?",
+                     "Edit",
+                     MessageBoxButton.YesNo,
+                     MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    WorkingWithCategories categories = new WorkingWithCategories(CATEGORYLIST);
+                    bool check = true;
+                    string mess = null;
+                    string error = null;
+
+                    categories.ReturnCategoryMethod(comboBoxList.SelectedItem.ToString(), out check);
+                    //categories.ReturnCategoryMethod(textBox_new_category.Text, out check);
+                    if (!categories.ValidateTextBoxCategory(textBox_new_category.Text, out error))// проверка на корректность данных / checking for data correctness
+                    {
+                        MessageBox.Show(error);
+                        return;
+                    }
+                    if (categories.CheckCategory(textBox_new_category.Text))
+                    {
+                        MessageBox.Show("Element exist");
+                        return;
+                    }
+                    string mes = null;
+                    Data.EditCategory(categories.ReturnCategory, textBox_new_category.Text, out mes);
+                    if (mes == null)
+                    {
+                        LoadCategoryInCombobox();
+                        textBox_new_category.Text = "";
+                        MessageBox.Show("The item has been edited successfully.");
+                    }
+                    else MessageBox.Show(mes);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }
