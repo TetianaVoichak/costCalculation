@@ -66,11 +66,7 @@ namespace costСalculation
                 List<InfoForDay> newList = new List<InfoForDay>();
 
 
-                YEARS = costsOf.FindYear(INFOFORDAYLIST);
-                foreach (var y in YEARS)
-                    combobox_year.Items.Add(y);
-
-               if(YEARS.Count > 0) combobox_year.SelectedItem = YEARS[YEARS.Count - 1];
+                FillingComboboxYearsMonths();
 
                 VisibilityDiagramAndRun();
 
@@ -79,6 +75,21 @@ namespace costСalculation
             catch (Exception ex) {MessageBox.Show(ex.Message); }
             
         }
+        //filling the combobox years and months
+        void FillingComboboxYearsMonths()
+        {
+            YEARS = costsOf.FindYear(INFOFORDAYLIST);
+            foreach (var y in YEARS)
+                combobox_year.Items.Add(y);
+
+            if (YEARS.Count > 0) combobox_year.SelectedItem = YEARS[YEARS.Count - 1];
+            if (MonthsDictionary.ContainsKey(DateTime.Now.Month))
+            {
+                comboBox_months.SelectedItem = MonthsDictionary[DateTime.Now.Month];
+            }
+        }
+
+
         //check if there is data for the diagram and display if there is
         void VisibilityDiagramAndRun()
         {
