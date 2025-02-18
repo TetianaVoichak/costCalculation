@@ -13,8 +13,8 @@
             <RowDefinition Height="420*"/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="button_Diagram" Content="Diagram" HorizontalAlignment="Left" Margin="19,166,0,0" VerticalAlignment="Top" Height="35" Width="149" Click="button_Diagram_Click" Grid.Row="1"/>
-        <ComboBox x:Name="comboBox_months"  HorizontalAlignment="Left" Margin="19,107,0,0" VerticalAlignment="Top" Width="149" Height="35" SelectedIndex="0" Grid.Row="1"/>
+        <Button x:Name="button_Diagram" Content="Diagram" HorizontalAlignment="Left" Margin="19,166,0,0" VerticalAlignment="Top" Height="35" Width="149" Click="button_Diagram_Click" Grid.Row="1" Visibility="Collapsed"/>
+        <ComboBox x:Name="comboBox_months"  HorizontalAlignment="Left" Margin="19,107,0,0" VerticalAlignment="Top" Width="149" Height="35" SelectedIndex="0" Grid.Row="1" SelectionChanged="comboBox_months_SelectionChanged" />
         <ComboBox x:Name="combobox_year" HorizontalAlignment="Left" Margin="19,36,0,0" VerticalAlignment="Top" Width="149" Height="34" SelectedIndex="0" SelectionChanged="combobox_year_SelectionChanged" Grid.Row="1"/>
         <Label Content="Select year" HorizontalAlignment="Left" Margin="19,6,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="67"/>
         <Label Content="Select month" HorizontalAlignment="Left" Height="27" Margin="19,75,0,0" VerticalAlignment="Top" Width="96" Grid.Row="1"/>

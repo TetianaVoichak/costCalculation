@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 using LiveCharts.Definitions.Charts;
 using System.ComponentModel;
 using System.Reflection;
+using System.Runtime.Serialization.Json;
 
 namespace costСalculation
 {
@@ -170,23 +171,18 @@ namespace costСalculation
         {
             try
             {
-                int monthInt = 0;
-                foreach (var m in MonthsDictionary)
+                var resultKey = MonthsDictionary.FirstOrDefault(value => value.Value == comboBox_months.SelectedItem.ToString());
+
+                if (!resultKey.Equals(default(KeyValuePair<int, string>)))
                 {
-                    if (m.Value == comboBox_months.Text)
-                    {
-                        monthInt = m.Key;
-                        break;
-                    }
-                }
-                if (monthInt != 0)
-                {
-                    ShowDiagram(monthInt, Convert.ToInt32(combobox_year.Text));
+                    int monthInt = resultKey.Key;
+                    ShowDiagram(monthInt, Convert.ToInt32(combobox_year.SelectedValue));
                     decimal total = Analysis.TotalSumCategory(categorySum);
                     string MonthStr = comboBox_months.Text;
                     string YearStr = combobox_year.Text;
                     resultMoney.Content = $"Total cost for {MonthStr} {YearStr}:  {total:F2} euro";
                 }
+
             }
             catch (Exception ex)
             {
@@ -215,6 +211,11 @@ namespace costСalculation
             }
             
 
+        }
+
+        private void comboBox_months_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            VisibilityDiagramAndRun();
         }
     }
 }
