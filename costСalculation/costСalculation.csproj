@@ -28,12 +28,24 @@
    <None Update="Data/datab.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+   <None Update="Properties\Settings.settings">
+     <Generator>SettingsSingleFileGenerator</Generator>
+     <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+   </None>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="View\" />
     <Folder Include="ViewModel\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>
