@@ -64,7 +64,7 @@ namespace costСalculation
         {
               date = _date;
               idCategory = _idcategory;
-            money = _money;
+              money = _money;
         }
 
     }

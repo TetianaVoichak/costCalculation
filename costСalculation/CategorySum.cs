@@ -12,7 +12,7 @@ namespace costСalculation
         public decimal TotalSum { get; set; }
 
 
-      public string Name { get; set; }
+        public string Name { get; set; }
         public int percent { get; set; }
 
     }

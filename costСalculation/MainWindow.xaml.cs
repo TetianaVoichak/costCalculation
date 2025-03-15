@@ -213,7 +213,7 @@ namespace costСalculation
         private void methodCheckDateAndCategory(DateTime d, Category c)
         {
             tempList = new List<InfoForDay>();
-            if (costsOf.CheckCategory(d, c, out tempList))
+            if (costsOf.CheckCategoryAndDate(d, c, out tempList))
             {
                 textBox_total_amount.Text = costsOf.AmoutByCategory(tempList, c).ToString();
             }
