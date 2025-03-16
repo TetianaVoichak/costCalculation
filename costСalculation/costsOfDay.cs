@@ -33,7 +33,7 @@ namespace costСalculation
         }
 
         //the method CheckDate checks if the date exists in the list of information
-        //TODO: This method can be rewritten more efficiently (search)
+        //TODO: This method CheckDate can be rewritten more efficiently (search)
         public bool CheckDate(DateTime d, out List<InfoForDay> tempList)
         {
             bool check = false;
@@ -47,7 +47,7 @@ namespace costСalculation
             return check;
         }
         //the method CheckCategoryAndDate checks if the date and category exists in the list of information
-        //TODO: This method can be rewritten more efficiently (search)
+        //TODO: This method CheckCategoryAndDate can be rewritten more efficiently (search)
 
         public bool CheckCategoryAndDate(DateTime d, Category c, out List<InfoForDay> tempList)
         {

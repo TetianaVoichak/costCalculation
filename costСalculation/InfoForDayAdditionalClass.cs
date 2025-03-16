@@ -7,6 +7,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace costСalculation
 {
+
+    //additional class InfoForDayAdditionalClass describing the entity InfoForDay from the table
+    //due to the fact that the table stores the data type string for the date
+
     [Table("InfoForDay")]
     public class InfoForDayAdditionalClass
     {

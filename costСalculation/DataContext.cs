@@ -9,6 +9,7 @@ using System.Data;
 
 namespace costСalculation
 {
+    //class DataContext manages the database connection, schema settings, and defines DbSets for tables
     public class DataContext : DbContext
     {
         public string ExceptionSqlDbContext {  get; set; }
@@ -18,9 +19,6 @@ namespace costСalculation
             
             ConnectionString = new SQLiteConnectionStringBuilder()
             {
-
-                //DataSource = "datab.db",
-                //DataSource = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CostCalculation", "datab.db"),
                 DataSource = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "datab.db"),
                 ForeignKeys = true
             }.ConnectionString
@@ -28,10 +26,6 @@ namespace costСalculation
         {
             try
             {
-                // Инициализируем базу данных при первом запуске
-                //Database.SetInitializer(new CreateDatabaseIfNotExists<DataContext>());
-
-                // Пример вызова для проверки подключения
                 this.Database.Connection.Open();
             }
             catch (Exception ex)

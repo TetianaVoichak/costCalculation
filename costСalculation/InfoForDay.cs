@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace costСalculation
 {
+    //class InfoForDay describing information about expenses for the day, 
+    //including a list of categories and a date in the DateTime type
     public class InfoForDay
     {
         [Key]

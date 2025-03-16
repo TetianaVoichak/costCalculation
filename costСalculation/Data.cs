@@ -10,9 +10,10 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace costСalculation
 {
+    //class Data is designed to work with the database
     class Data
     {
-
+        //the method GetCategories gets a list of categories from the database
         public static List<Category> GetCategories()
         {
             var list = new List<Category>();
@@ -27,7 +28,12 @@ namespace costСalculation
             }
         }
 
-        //suchen, ob schon diese "Category" in der Liste gibt
+        //the method CheckCategory checks if there is already a category with this name in the database
+        //and returns true or false
+
+        //TODO: this method CheckCategory can be rewritten more efficiently,
+        //move the linq query to a separate method if possible,
+        //because the same query uses another method
         public static bool CheckCategory(Category cat)
         {
             bool temp = false;
@@ -40,7 +46,12 @@ namespace costСalculation
             }
             return temp;
         }
+        //the method CheckCategoryName checks if there is already a category with this name in the database
+        //and returns true or false
 
+        //TODO: this method CheckCategoryName can be rewritten more efficiently,
+        //move the linq query to a separate method if possible,
+        //because the same query uses another method
         public static bool CheckCategoryName(string catName)
         {
             bool temp = false;
@@ -54,6 +65,9 @@ namespace costСalculation
             return temp;
         }
 
+        //the method AddCategory adds a new category to the database,
+        //first checking whether the category is already in the database
+        //and using the out argument we return a message that the element already exists or null
         public static void AddCategory(Category category, out string message)
         {
             if (!CheckCategory(category))
@@ -67,8 +81,10 @@ namespace costСalculation
 
             }
             else message = "Element exists";
-
         }
+
+        //the method CheckIfTheCategoryIsFound searches for a category in the general list
+        //TODO: This method CheckIfTheCategoryIsFound can be rewritten more efficiently(search)
 
         private static bool CheckIfTheCategoryIsFound(Category category)
         {
@@ -76,11 +92,12 @@ namespace costСalculation
             {
                 if (info.idCategory == category.idCategory)
                     return true;
-                 
             }
             return false;
         }
 
+        //the method DeleteCategory deletes the category or, using the parameter with the out argument,
+        //passes information about the impossibility of deleting due to links in the external table
         public static void DeleteCategory(Category category, out string msg)
         {
             if (!CheckIfTheCategoryIsFound(category))
@@ -96,47 +113,37 @@ namespace costСalculation
             }
             else
             {
-                 msg = "Unable to delete. This category is in use.";
+                msg = "Unable to delete. This category is in use.";
             }
-               
+
         }
 
-        //convert string to date from database and write to list
-        public static void GetСonvertStringToDate()
-        {
-
-            using (var ctx = new DataContext())
-            {
-
-            }
-        }
-
+        //the method GetInfoForDay reads information about each day from the database
         public static List<InfoForDay> GetInfoForDay()
         {
             var listI = new List<InfoForDay>();
 
             using (var ctx = new DataContext())
             {
-                // Считываем данные из базы данных в промежуточный класс /  Read data from the database into the intermediate class
+                // Read data from the database into the intermediate class
                 var dataFromDb = ctx.Set<InfoForDayAdditionalClass>().ToList();
 
-                // Преобразуем строковые даты в DateTime / Convert string dates to DateTime
+                // Convert string dates to DateTime
                 var infoList = dataFromDb
                     .Select(info =>
                     {
                         DateTime parsedDate;
                         bool isDateValid = DateTime.TryParse(info.Date, out parsedDate);
 
-                        // Преобразуем строковую дату и возвращаем объект InfoForDay / Convert the string date and return the InfoForDay object
+                        // Convert the string date and return the InfoForDay object
                         return new InfoForDay
                         {
-                            //idInfo = info.idInfo,
                             Date = isDateValid ? parsedDate : DateTime.MinValue,
                             Money = info.Money,
                             idCategory = info.idCategory
                         };
                     })
-                    .Where(info => info.Date != DateTime.MinValue) // Исключаем записи с некорректными датами / Exclude records with incorrect dates
+                    .Where(info => info.Date != DateTime.MinValue) // Exclude records with incorrect dates
                     .ToList();
 
 
@@ -145,21 +152,18 @@ namespace costСalculation
                     listI.Add(i);
                 }
 
-
                 return listI;
             }
 
         }
 
-
+        //the method AddInfo adds information about a new day to the database
         public static void AddInfo(InfoForDay info)
         {
             InfoForDayAdditionalClass infoAdd = new InfoForDayAdditionalClass();
-            // infoAdd.idInfo = info.idInfo;
             infoAdd.Date = info.Date.ToString();
             infoAdd.Money = info.Money;
             infoAdd.idCategory = info.Category1.idCategory;
-            //infoAdd.idCategory = info.idCategory;
 
             using (var ctx = new DataContext())
             {
@@ -170,7 +174,7 @@ namespace costСalculation
         }
 
 
-        //edit date
+        //the method EditInfo edits info from a date in the DB
         public static void EditInfo(InfoForDay info)
         {
             InfoForDayAdditionalClass infoEdit = new InfoForDayAdditionalClass();
@@ -184,13 +188,14 @@ namespace costСalculation
                 var result = ctx.InfoForDayAdditionalClassList
                     .Where(b => b.Date == date && b.idCategory == infoEdit.idCategory)
                     .ToList();
-                if (result != null )
-                {   
+                if (result.Any()) //Checking if there are records
+                {
+                    //in the database we edit in the first found record with the selected date
                     result[0].Date = info.Date.ToString();
-                    result[0].Money =  info.Money ;
+                    result[0].Money = info.Money;
                     result[0].idCategory = info.Category1.idCategory;
-
-                    if(result.Count > 1)
+                    //if there were more lines with this date and this category, then in the remaining lines in money we write 0
+                    if (result.Count > 1)
                     {
                         for (int i = 1; i < result.Count; i++)
                             result[i].Money = 0;
@@ -201,7 +206,7 @@ namespace costСalculation
             }
         }
 
-        //delete date
+        //the method DeleteDate allows you to delete a date from the database
         public static void DeleteDate(InfoForDay info)
         {
             string dateDeleteStr = info.Date.ToString();
@@ -212,29 +217,29 @@ namespace costСalculation
                 infoEdit.Date = info.Date.ToString();
                 infoEdit.Money = info.Money;
                 infoEdit.idCategory = info.Category1.idCategory; ;
-             
+
 
                 var element = ctx.InfoForDayAdditionalClassList
                 .Where(e => e.Date == dateDeleteStr).ToList();
-                if(element!=null)
+                if (element != null)
                 {
                     foreach (var item in element)
                         ctx.InfoForDayAdditionalClassList.Remove(item);
                     ctx.SaveChanges();
                 }
-               
-            }
-         }
-        
 
-        //delete remove category from current day
+            }
+        }
+
+
+        //the method DeleteCategoryFromDate allows you to delete a category from the database from current day
 
         public static void DeleteCategoryFromDate(InfoForDay info, Category category)
         {
-            
+
             using (var ctx = new DataContext())
             {
-                
+
                 InfoForDayAdditionalClass infoEdit = new InfoForDayAdditionalClass();
                 string strDate = "";
                 infoEdit.Date = info.Date.ToString();
@@ -258,16 +263,17 @@ namespace costСalculation
             }
         }
 
-        //find year
+        //the method FindYear find info about the year
         public static void FindYear(InfoForDay infoDays)
         {
-            using(var ctx = new DataContext())
+            using (var ctx = new DataContext())
             {
                 InfoForDayAdditionalClass infoFindYear = new InfoForDayAdditionalClass();
                 infoFindYear.Date = infoDays.Date.ToString();
             }
         }
 
+        //the  method Edit Category edits a category or returns information that such a category already exists
         public static void EditCategory(Category category, string newNameCateg, out string message)
         {
             message = null;
@@ -288,18 +294,15 @@ namespace costСalculation
                 }
             }
             else message = "Element exists";
-           
-            }
-         
-        
 
+        }
 
     }
 }
 
 
 
-    
+
 
 
 
