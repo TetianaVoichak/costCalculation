@@ -13,11 +13,13 @@ using System.Windows.Shapes;
 namespace costСalculation
 {
     /// <summary>
-    /// Логика взаимодействия для Window_add_category.xaml
+    /// Interaction logic for Window_add_category.xaml
     /// </summary>
     public partial class Window_add_category : Window
     {
         List<Category> listCategory = new List<Category>();
+
+        //CATEGORYLIST stores all categories from the database
         public List<Category> CATEGORYLIST { get; set; } = Data.GetCategories();
         
         public Window_add_category()
@@ -34,23 +36,8 @@ namespace costСalculation
                 comboBoxList.Items.Add(a.NameCategory);
             comboBoxList.SelectedIndex = 0;
         }
-       
-        private void textBox_new_category_TextChanged(object sender, TextChangedEventArgs e)
-        {
-           
-        }
-        /*// проверка на корректность данных / checking for data correctness
-        void CheckingForDataCorrectness(Category c, WorkingWithCategories workingWith)
-        {
-            string error = null;
-            if (!workingWith.ValidateCategory(c, out error))// проверка на корректность данных / checking for data correctness
-            {
-                MessageBox.Show(error);
-                return;
-            }
 
-        }*/
-
+        //button to save a new category
         private void button_save_new_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -59,7 +46,7 @@ namespace costСalculation
                     Category c = new Category(textBox_new_category.Text);
                     WorkingWithCategories workingWith = new WorkingWithCategories(c);
                     string error = null;
-                    if (!workingWith.ValidateCategory(c, out error))// проверка на корректность данных / checking for data correctness
+                    if (!workingWith.ValidateCategory(c, out error))//checking for data correctness
                     {
                         MessageBox.Show(error);
                         return;
@@ -128,12 +115,11 @@ namespace costСalculation
                 {
                     WorkingWithCategories categories = new WorkingWithCategories(CATEGORYLIST);
                     bool check = true;
-                    string mess = null;
                     string error = null;
 
                     categories.ReturnCategoryMethod(comboBoxList.SelectedItem.ToString(), out check);
-                    //categories.ReturnCategoryMethod(textBox_new_category.Text, out check);
-                    if (!categories.ValidateTextBoxCategory(textBox_new_category.Text, out error))// проверка на корректность данных / checking for data correctness
+
+                    if (!categories.ValidateTextBoxCategory(textBox_new_category.Text, out error))//checking for data correctness
                     {
                         MessageBox.Show(error);
                         return;
@@ -144,6 +130,7 @@ namespace costСalculation
                         return;
                     }
                     string mes = null;
+
                     Data.EditCategory(categories.ReturnCategory, textBox_new_category.Text, out mes);
                     if (mes == null)
                     {

@@ -24,7 +24,7 @@ using System.Runtime.Serialization.Json;
 namespace costСalculation
 {
     /// <summary>
-    /// Логика взаимодействия для WindowDiagram.xaml
+    /// Interaction logic for WindowDiagram.xaml
     /// </summary>
     public partial class WindowDiagram : Window
     {
@@ -38,7 +38,7 @@ namespace costСalculation
         public List<int> YEARS = new List<int>();
         List<CategorySum> categorySum = new List<CategorySum>();
         public SeriesCollection CollectionCategory { get; set; }
-       
+
 
         public WindowDiagram()
         {
@@ -73,8 +73,8 @@ namespace costСalculation
 
 
             }
-            catch (Exception ex) {MessageBox.Show(ex.Message); }
-            
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+
         }
         //filling the combobox years and months
         void FillingComboboxYearsMonths()
@@ -108,47 +108,47 @@ namespace costСalculation
         void ShowDiagram(int month, int year)
         {
             categorySum = Analysis.CalculationForAnalysis(month, year, YEARS, costsOf, CATEGORYLIST);
-            decimal sum = 0 ;
+            decimal sum = 0;
             List<CategorySum> categorySumPercent = Analysis.CalculatePercentageOfAmount(categorySum, out sum);
 
 
-            // Создаем данные для диаграммы / Create data for the chart
+            // Create data for the chart
             CollectionCategory = new SeriesCollection
             {
                 new ColumnSeries
                 {
                     Title = "Diagram ( "+combobox_year.Text+", " + comboBox_months.Text+" )",
                     Values = new ChartValues<int> (categorySumPercent.Select(x=>x.percent)),
-                    DataLabels = true, // Включение отображения данных на столбцах / Enable displaying data on columns               
-                    //LabelPoint = point => categorySum[(int)point.X].Name + "\n" + point.Y.ToString() + " Euro", // Название категории + сумма, // Подпись будет названием категории /Category name + amount, // Label will be category name
+                    DataLabels = true, // Enable displaying data on columns               
+
 
                      LabelPoint = point =>
                      {
-                            int index = (int)point.X; // Получаем индекс текущего столбца // Get the index of the current column
-                            decimal amountInEuro = categorySum[index].TotalSum; // Получаем соответствующую сумму /receive the corresponding amount
-                           // return $"{categorySum[index].Name}\n{amountInEuro:F2} Euro";
+                            int index = (int)point.X; //Get the index of the current column
+                            decimal amountInEuro = categorySum[index].TotalSum; // receive the corresponding amount
+                         
                          return $"{amountInEuro:F2} Euro";
                        },
                 }
             };
-         
+
 
             barChart.Series = CollectionCategory;
 
             barChart.AxisY.Clear();
 
-            // Настраиваем ось Y от 0 до 100 /the Y axis from 0 to 100
+            // the Y axis from 0 to 100
             barChart.AxisY.Add(new Axis
             {
                 Title = "Percentage (%)",
                 MinValue = 0, // min
                 MaxValue = 100, // max
-                Separator = new LiveCharts.Wpf.Separator { Step = 10 } 
+                Separator = new LiveCharts.Wpf.Separator { Step = 10 }
             });
 
             barChart.AxisX.Clear();
 
-            List<string> labelsWithPercentage =  Analysis.ReturnLabelsWithPercentage(categorySum);
+            List<string> labelsWithPercentage = Analysis.ReturnLabelsWithPercentage(categorySum);
 
             if (labelsWithPercentage.Count == CollectionCategory[0].Values.Count)
             {
@@ -157,16 +157,15 @@ namespace costСalculation
                     Labels = labelsWithPercentage,
                     LabelsRotation = 45,
                     Foreground = Brushes.Black,
-                    Separator = new LiveCharts.Wpf.Separator { Step = 1 } 
+                    Separator = new LiveCharts.Wpf.Separator { Step = 1 }
                 });
             }
 
-            // Устанавливаем DataContext для привязки данных / Set DataContext for data binding
             DataContext = this;
         }
 
-     
-     
+
+
         void StartTheDiagram()
         {
             try
@@ -200,16 +199,16 @@ namespace costСalculation
             comboBox_months.Items.Clear();
             comboBox_months.SelectedIndex = 0;
             costsOf = new costsOfDay(INFOFORDAYLIST);
-            List<InfoForDay> newListThisYear = new List<InfoForDay>();  
+            List<InfoForDay> newListThisYear = new List<InfoForDay>();
             newListThisYear = costsOf.FindDaysFromYear(Convert.ToInt32(combobox_year.SelectedItem.ToString()));
             List<int> months = costsOf.FindMonthsFromInfo(newListThisYear);
 
-            foreach(var m in months)
+            foreach (var m in months)
             {
-                if(MonthsDictionary.ContainsKey(m))
+                if (MonthsDictionary.ContainsKey(m))
                     comboBox_months.Items.Add(MonthsDictionary[m]);
             }
-            
+
 
         }
 

@@ -22,8 +22,10 @@ namespace costСalculation
     /// </summary>
     public partial class MainWindow : Window
     {
-       
+        //CATEGORYLIST stores all categories from the database
         public List<Category> CATEGORYLIST { get; set; } = Data.GetCategories();
+
+        //INFOFORDAYLIST stores all the information about days from the database
         public List<InfoForDay> INFOFORDAYLIST { get; set; } = Data.GetInfoForDay();
 
         private DateTime? _initialDate;
@@ -42,24 +44,17 @@ namespace costСalculation
 
             _initialDate = datePickerMain.SelectedDate;
 
-
         }
 
-        //загружаем информацию данной даты в формы / load information of this date into forms
+        //the method InfoCurrentDayinForm loads the information about days
         void InfoCurrentDayinForm(DateTime date, List<InfoForDay> list)
         {
             costsOf = new costsOfDay(list);
             List<InfoForDay> infoList = new List<InfoForDay>();
-
-            //costsOf.InfoCurrentDay(date, list);//???
-
-            //costsOf.CheckDate(date, out infoList);
-            //costsOf.InfoCurrentDay(date, infoList);
             methodCheckDate(date);
 
         }
-
-
+        //the method LoadInfoForDay loads the information about days
         void LoadInfoForDay(DateTime date)
         {
             List<InfoForDay> listInfoForDayCurrent = new List<InfoForDay>();
@@ -69,18 +64,16 @@ namespace costСalculation
         }
 
         costsOfDay costsOf = new costsOfDay();
-        decimal money;//a variable that stores money
+        decimal money;
 
-        //check and convert text to currency format
+        //the method workWithMoneyFromTxt checks and convert text to currency format
         decimal workWithMoneyFromTxt(string str_money)
         {
             string strMoneyTrim = str_money.Trim();
-            // Заменяем точку на запятую, если точка используется в качестве десятичного разделителя
             // Replace the period with a comma if the period is used as a decimal separator
-
             strMoneyTrim = strMoneyTrim.Replace('.', ',');
 
-            // Пробуем преобразовать строку в decimal / change to decimal from string
+            //change to decimal from string
             if (decimal.TryParse(strMoneyTrim, NumberStyles.Any, CultureInfo.CurrentCulture, out decimal result))
             {
                 if (result >= 0 && result <= 1000000)
@@ -95,7 +88,6 @@ namespace costСalculation
             }
             else
             {
-                // Сообщаем об ошибке
                 MessageBox.Show("Invalid number format");
                 money = 0;
             }
@@ -103,41 +95,41 @@ namespace costСalculation
 
         }
 
-        //save info new day
+        //save info about a new day
         private void button_add_money_to_this_category_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if(comboBox_category.Items.Count>0)
+                if (comboBox_category.Items.Count > 0)
                 {
-                Category categForInfo;
-                if (workingWithCategoryMethod(out categForInfo, comboBox_category.SelectedItem.ToString()) == true)
-                {
-
-                    workWithMoneyFromTxt(textBox_cash.Text);
-                    if (money > 0)
+                    Category categForInfo;
+                    if (workingWithCategoryMethod(out categForInfo, comboBox_category.SelectedItem.ToString()) == true)
                     {
-                        InfoForDay info = new InfoForDay(datePickerSetDate.SelectedDate.Value, categForInfo, money);
-                        Data.AddInfo(info);
 
-                        LoadInfoForDay(datePickerMain.SelectedDate.Value);
-                        money = 0;
-                        MessageBox.Show("data saved successfully");
+                        workWithMoneyFromTxt(textBox_cash.Text);
+                        if (money > 0)
+                        {
+                            InfoForDay info = new InfoForDay(datePickerSetDate.SelectedDate.Value, categForInfo, money);
+                            Data.AddInfo(info);
+
+                            LoadInfoForDay(datePickerMain.SelectedDate.Value);
+                            money = 0;
+                            MessageBox.Show("data saved successfully");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid number format");
+                            money = 0;
+                        }
+
                     }
                     else
                     {
-                        MessageBox.Show("Invalid number format");
-                        money = 0;
+                        MessageBox.Show("Cannot be added to the database");
                     }
-
-                }
-                else
-                {
-                    MessageBox.Show("Cannot be added to the database");
-                }
                 }
                 else { MessageBox.Show("need to add category"); }
-              
+
             }
             catch (Exception ex)
             {
@@ -156,14 +148,13 @@ namespace costСalculation
         //fill in the date information in the form und show
         void fillShowInfotheDateinForm(DateTime d, List<InfoForDay> tempList)
         {
-            //???
             textBox_total_amount_this_day.Text = costsOf.AmountInDay(d, tempList).ToString();
             var result = tempList.GroupBy(p => new { p.Category1.NameCategory });
 
 
             foreach (var a in result)
                 comboBox_category_choose.Items.Add(a.Key.NameCategory);
-            //   textBox_total_amount.Text = tempList[comboBox_category_choose.SelectedIndex].Money.ToString();
+
             Category cat = new Category(comboBox_category_choose.SelectedItem.ToString());
             methodCheckDateAndCategory(d, cat);
         }
@@ -224,7 +215,6 @@ namespace costСalculation
             {
                 if (comboBox_category_choose.Items.Count > 0)
                 {
-                    //здесь ошибка??
                     Category cat = new Category(comboBox_category_choose.SelectedItem.ToString());
                     methodCheckDateAndCategory(datePickerMain.SelectedDate.Value, cat);
                 }
@@ -252,10 +242,6 @@ namespace costСalculation
         }
 
 
-        private void comboBox_category_choose_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
 
         //edit current entry
         private void button_edit_Click(object sender, RoutedEventArgs e)
@@ -278,7 +264,7 @@ namespace costСalculation
             }
         }
 
-        //determining which category is selected in order to change the data in the future / определение какая категория выбрана чтобы в будущем менять данные
+        //determining which category is selected in order to change the data in the future
         bool workingWithCategoryMethod(out Category categForInfo, string categoryFromCombobox)
         {
             WorkingWithCategories workingCategory = new WorkingWithCategories(CATEGORYLIST);
@@ -315,7 +301,7 @@ namespace costСalculation
                             money = 0;
                             textBox_total_amount.IsEnabled = false;
                             button_delete_category.IsEnabled = false;
-                            button_save_edit.IsEnabled = false; 
+                            button_save_edit.IsEnabled = false;
 
                             MessageBox.Show("changes have been saved");
                         }
@@ -370,7 +356,7 @@ namespace costСalculation
             {
                 MessageBox.Show(ex.ToString());
             }
-            
+
         }
 
         private void button_delete_category_Click(object sender, RoutedEventArgs e)

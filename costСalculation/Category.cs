@@ -6,13 +6,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace costСalculation
 {
+    //the class Category represents information about the category
     public class Category 
     {
         [Key]
         public int idCategory { get; set; }
 
-
-        
         string nameCategory;
 
         [Required(ErrorMessage = "Name cannot be null or empty.")]
@@ -27,7 +26,7 @@ namespace costСalculation
 
         }
 
-        // IDataErrorInfo implementation // часть интерфейса IDataErrorInfo
+        // IDataErrorInfo implementation
         public string Error => null;
 
         public string this[string columnName]

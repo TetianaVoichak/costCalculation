@@ -20,8 +20,7 @@
         <Button x:Name="button_add_money_to_this_category" Content="+" HorizontalAlignment="Left" Margin="27,0,0,80" VerticalAlignment="Bottom" Height="67" Width="325" FontSize="36" Click="button_add_money_to_this_category_Click" Grid.Row="1"/>
         <ComboBox x:Name="comboBox_category" HorizontalAlignment="Left" Margin="27,105,0,0" VerticalAlignment="Top" Width="325" Height="57" Grid.RowSpan="2" FontSize="18" SelectedIndex="0"/>
         <Label Content="Euro" HorizontalAlignment="Left" Margin="275,73,0,0" Grid.Row="1" VerticalAlignment="Top" Height="62" Width="67" FontSize="18"/>
-        <ComboBox x:Name="comboBox_category_choose"  HorizontalAlignment="Left" Margin="531,63,0,0" VerticalAlignment="Top" Width="277" Height="56"  Grid.Row="1" SelectionChanged="comboBox_category_choose_SelectionChanged" SelectedIndex="0" IsVisibleChanged="comboBox_category_choose_IsVisibleChanged" FontSize="18">
-            <!--ItemsSource="{Binding CATEGORYLIST}"-->
+        <ComboBox x:Name="comboBox_category_choose"  HorizontalAlignment="Left" Margin="531,63,0,0" VerticalAlignment="Top" Width="277" Height="56"  Grid.Row="1" SelectionChanged="comboBox_category_choose_SelectionChanged" SelectedIndex="0" FontSize="18">
             <ComboBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace costСalculation
 {
+    //CategorySum class that contains the CategoryId, Name, TotalSum and percent
+    //for each category (used to plot the chart)
     internal class CategorySum
     {
         public int CategoryId { get; set; }
