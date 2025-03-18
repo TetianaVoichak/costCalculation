@@ -28,41 +28,29 @@ namespace costСalculation
             }
         }
 
-        //the method CheckCategory checks if there is already a category with this name in the database
-        //and returns true or false
+        //General method to check if a category with a given name exists
+        private static bool CategoryExists(string categoryName)
+        {
+            using (var ctx = new DataContext())
+            {
+                // Checks if a category with the specified name exists (ignoring case).
+                // The method returns true if such a category is found, and false if not.
+                return ctx.Categories.Any(c => c.NameCategory.ToLower() == categoryName.ToLower());
+            }
+        }
 
-        //TODO: this method CheckCategory can be rewritten more efficiently,
-        //move the linq query to a separate method if possible,
-        //because the same query uses another method
+
+        //the method CheckCategory that calls a method to check if a category with the specified name exists
+        //input parameter type Category
         public static bool CheckCategory(Category cat)
         {
-            bool temp = false;
-            using (var ctx = new DataContext())
-            {
-                var count = ctx.Categories
-                  .Where(c => c.NameCategory.ToLower() == cat.NameCategory.ToLower()).Count();
-
-                if (count > 0) temp = true;
-            }
-            return temp;
+            return CategoryExists(cat.NameCategory);
         }
-        //the method CheckCategoryName checks if there is already a category with this name in the database
-        //and returns true or false
-
-        //TODO: this method CheckCategoryName can be rewritten more efficiently,
-        //move the linq query to a separate method if possible,
-        //because the same query uses another method
+        //the method CheckCategoryName that calls a method to check if a category with the specified name exists
+        //input parameter type string
         public static bool CheckCategoryName(string catName)
         {
-            bool temp = false;
-            using (var ctx = new DataContext())
-            {
-                var count = ctx.Categories
-                  .Where(c => c.NameCategory.ToLower() == catName.ToLower()).Count();
-
-                if (count > 0) temp = true;
-            }
-            return temp;
+            return CategoryExists(catName);
         }
 
         //the method AddCategory adds a new category to the database,
@@ -84,16 +72,12 @@ namespace costСalculation
         }
 
         //the method CheckIfTheCategoryIsFound searches for a category in the general list
-        //TODO: This method CheckIfTheCategoryIsFound can be rewritten more efficiently(search)
-
+   
         private static bool CheckIfTheCategoryIsFound(Category category)
         {
-            foreach (var info in GetInfoForDay())
-            {
-                if (info.idCategory == category.idCategory)
-                    return true;
-            }
-            return false;
+            // Checks if there is at least one element where idCategory matches category.idCategory
+            return GetInfoForDay().Any(info => info.idCategory == category.idCategory);
+
         }
 
         //the method DeleteCategory deletes the category or, using the parameter with the out argument,

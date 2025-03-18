@@ -34,7 +34,7 @@ namespace costСalculation
             return categorySum;
         }
         //the method TotalSumCategory searches total amount by category
-        //TODO: This method TotalSumCategory can be rewritten more efficiently
+      
         public static decimal TotalSumCategory(List<CategorySum> categorySumList)
         {
             decimal sum = 0;

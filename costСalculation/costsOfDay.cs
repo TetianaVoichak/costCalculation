@@ -33,35 +33,23 @@ namespace costСalculation
         }
 
         //the method CheckDate checks if the date exists in the list of information
-        //TODO: This method CheckDate can be rewritten more efficiently (search)
+       
         public bool CheckDate(DateTime d, out List<InfoForDay> tempList)
         {
-            bool check = false;
-            tempList = new List<InfoForDay>();
-            foreach (var a in listForDay)
-                if (d == a.Date)
-                {
-                    tempList.Add(a);
-                    check = true;
-                }
-            return check;
+            tempList = listForDay.Where(a => a.Date == d).ToList();
+            return tempList.Any(); // Returns true if the list is not empty
         }
+
         //the method CheckCategoryAndDate checks if the date and category exists in the list of information
-        //TODO: This method CheckCategoryAndDate can be rewritten more efficiently (search)
 
         public bool CheckCategoryAndDate(DateTime d, Category c, out List<InfoForDay> tempList)
         {
-            bool check = false;
-            tempList = new List<InfoForDay>();
-            foreach (var a in listForDay)
-                if (c.NameCategory.ToString() == a.Category1.NameCategory.ToString()
-                    && d == a.Date)
-                    {
-                        tempList.Add(a);
-                        check = true;
-                    }
+            
+                tempList = listForDay
+                    .Where(a => a.Category1.NameCategory == c.NameCategory && a.Date == d)
+                    .ToList();
 
-            return check;
+            return tempList.Any(); // Returns true if the list is not empty
         }
 
         //the method AmoutByCategory searches amount for a specific category
