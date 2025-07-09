@@ -6,10 +6,9 @@
         xmlns:svg="http://sharpvectors.codeplex.com/svgc/" 
         xmlns:local="clr-namespace:costСalculation"
         mc:Ignorable="d"
-        Title="CostCalculation" Height="450" Width="970" Background="#EDF8F1">
-    <Window.DataContext>
-        <Binding RelativeSource="{RelativeSource Self}"/>
-    </Window.DataContext>
+        Title="CostCalculation" Height="450" Width="970" Background="#EDF8F1" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+   
     <Grid Width="950" Background="#EDF8F1" Margin="10,0,10,0" Height="412" VerticalAlignment="Top" >
         <Grid.RowDefinitions>
             <RowDefinition Height="147"/>
@@ -23,7 +22,7 @@
                             Stretch="Uniform" Margin="14,14,10,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
             </svg:SvgViewbox>
         </Grid>
-        <ComboBox x:Name="comboBox_category" HorizontalAlignment="Left" Margin="27,98,0,0" VerticalAlignment="Top" Width="276" Height="40" FontSize="18" SelectedIndex="0" Background="#D5EBDD"/>
+        <ComboBox x:Name="comboBox_category" HorizontalAlignment="Left" Margin="27,98,0,0" VerticalAlignment="Top" Width="276" Height="40" FontSize="18" SelectedIndex="0"/>
         <Label Content="Euro" HorizontalAlignment="Left" Margin="255,20,0,0" Grid.Row="1" VerticalAlignment="Top" Height="62" Width="67" FontSize="18"/>
         <ComboBox x:Name="comboBox_category_choose"  HorizontalAlignment="Left" Margin="491,23,0,0" VerticalAlignment="Top" Width="277" Height="40"  Grid.Row="1" SelectionChanged="comboBox_category_choose_SelectionChanged" SelectedIndex="0" FontSize="18" BorderThickness="1">
             <ComboBox.Resources>

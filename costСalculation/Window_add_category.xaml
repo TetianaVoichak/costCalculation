@@ -5,15 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:costСalculation"
         mc:Ignorable="d"
-        Title="New category" Height="215" Width="499" Closing="Window_Closing">
-    <Grid Height="192" VerticalAlignment="Top" Margin="0,0,10,0" Background="Azure">
-
-        <TextBox x:Name="textBox_new_category" Height="40" Margin="31,45,36,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Label Content="Input new category" HorizontalAlignment="Left" Margin="31,15,0,0" VerticalAlignment="Top" Width="213" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Button x:Name="button_save_new" Content="Save" Margin="31,95,36,0" VerticalAlignment="Top" Height="36" Click="button_save_new_Click"/>
-        <ComboBox x:Name="comboBoxList" HorizontalAlignment="Left" Margin="31,140,0,0" VerticalAlignment="Top" Width="233" SelectedIndex="0" Height="32"/>
-        <Button x:Name="button_delete" Content="Delete" HorizontalAlignment="Left" Margin="378,140,0,0" VerticalAlignment="Top" Width="75" Height="32" Click="button_delete_Click"/>
-        <Button x:Name="buttonEdit" Content="Edit" HorizontalAlignment="Left" Margin="291,140,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.01,-0.529" Width="68" Height="31" Click="buttonEdit_Click"/>
-
+        Title="New category" Height="320" Width="400" Background="#EDF8F1" Closing="Window_Closing" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Background="#EDF8F1" >
+        <TextBox x:Name="textBox_new_category" Height="35" Margin="34,89,30,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Label Content="Input new category" Height="35" HorizontalAlignment="Left" Margin="31,10,0,0" VerticalAlignment="Top" />
+        <Button x:Name="button_save_new"  Content="Save" Margin="34,135,30,0" VerticalAlignment="Top" Height="35" Click="button_save_new_Click" Background="#D5EBDD"/>
+        <ComboBox x:Name="comboBoxList" Margin="34,41,30,0" VerticalAlignment="Top" SelectedIndex="0" Height="35" />
+        <Button x:Name="button_delete" Content="Delete" Margin="34,236,30,0" VerticalAlignment="Top"  Height="35" Click="button_delete_Click" Background="#D5EBDD"/>
+        <Button x:Name="buttonEdit" Content="Edit" Margin="34,186,30,0" VerticalAlignment="Top" Height="35" Click="buttonEdit_Click" Background="#D5EBDD"/>
     </Grid>
 </Window>
