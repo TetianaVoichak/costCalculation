@@ -18,9 +18,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="img\logo-laptop.svg" />
+    <None Remove="logo-laptop.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
 	   <PackageReference Include="EntityFramework" Version="6.5.1" />
     <PackageReference Include="LiveCharts.Wpf.Core" Version="0.9.8" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.8" />
+    <PackageReference Include="SharpVectors.Wpf" Version="1.8.4.2" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
   </ItemGroup>
 
@@ -38,6 +44,12 @@
     <Folder Include="View\" />
     <Folder Include="ViewModel\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="img\logo-laptop.svg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
