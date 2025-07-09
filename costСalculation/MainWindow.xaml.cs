@@ -140,10 +140,6 @@ namespace costСalculation
         }
 
         List<InfoForDay> tempList;
-        private decimal totalAmountForTheDay(DateTime d, List<InfoForDay> list)
-        {
-            return costsOf.AmountInDay(d, list);
-        }
 
         //fill in the date information in the form und show
         void fillShowInfotheDateinForm(DateTime d, List<InfoForDay> tempList)

@@ -120,7 +120,7 @@ namespace costСalculation
                     Title = "Diagram ( "+combobox_year.Text+", " + comboBox_months.Text+" )",
                     Values = new ChartValues<int> (categorySumPercent.Select(x=>x.percent)),
                     DataLabels = true, // Enable displaying data on columns               
-
+                    Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#B3D4C2")),
 
                      LabelPoint = point =>
                      {

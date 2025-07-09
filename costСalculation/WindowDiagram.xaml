@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:costСalculation"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="Analytics" Height="500" Width="1300" Background="Azure">
+        Title="Analytics" Height="500" Width="1300" Background="#EDF8F1">
     <Grid Margin="10,0,0,-6">
         <Grid.RowDefinitions>
             <RowDefinition Height="13*"/>
