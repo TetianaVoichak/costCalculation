@@ -1,10 +1,34 @@
-**Application for calculating expenses in everyday life.**
+**CostCalculation**
 
- **C#** Technology: **WPF**, **Entity Framework** DB: **SQLite** 
+**Built with**:
+
+- C# / .NET  
+- WPF (Windows Presentation Foundation)  
+- LINQ  
+- SQLite as local database  
+
+🚀 **Features**
+
+- Add, edit, and delete daily expenses  
+- Organize costs by categories  
+- View monthly analytics with charts  
+- Lightweight and easy to use  
 
 
-**Instructions**
+📦 **Installation Instructions**
 
-Download the archive.
-Unzip the archive.
-To run the application, extract the folder CostCalculationVersion2_0_1.zip and execute the file costCalculation.exe.
+1. Download the archive `CostCalculationVersion2_0_2.zip`  
+2. Extract the contents to a folder of your choice  
+3. Run the application by executing `costCalculation.exe`  
+
+
+📝 **Notes**
+
+- Runs on Windows OS  
+
+
+📄 **License**
+
+MIT License
+
+You are free to use, modify, and distribute this software with proper attribution to the author.

@@ -8,14 +8,14 @@
         mc:Ignorable="d"
         Title="CostCalculation" Height="450" Width="970" Background="#EDF8F1" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
-   
+
     <Grid Width="950" Background="#EDF8F1" Margin="10,0,10,0" Height="412" VerticalAlignment="Top" >
         <Grid.RowDefinitions>
             <RowDefinition Height="147"/>
             <RowDefinition Height="305"/>
         </Grid.RowDefinitions>
         <TextBox x:Name="textBox_info_current_date" HorizontalAlignment="Left" TextAlignment="Center" Margin="400,199,0,68" TextWrapping="Wrap" Width="202" Height="38"  IsReadOnly="True" FontSize="18" Grid.Row="1" Background="#FFEDF8F1" Foreground="#FF1F6A51" BorderBrush="#FFEDF8F1"/>
-        <TextBox x:Name="textBox_cash" HorizontalAlignment="Left" Height="40" Margin="27,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" FontSize="18" Grid.Row="1" PreviewMouseDown="textBox_cash_PreviewMouseDown"/>
+        <TextBox x:Name="textBox_cash" HorizontalAlignment="Left" Height="40" Margin="27,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" FontSize="18" Grid.Row="1" PreviewMouseDown="textBox_cash_PreviewMouseDown"/>
         <Button x:Name="button_add_money_to_this_category" Content="+" HorizontalAlignment="Left" Margin="27,0,0,170" VerticalAlignment="Bottom" Height="57" Width="277" FontSize="36" Click="button_add_money_to_this_category_Click" Grid.Row="1" Background="#D5EBDD"/>
         <Grid Margin="302,153,518,22" Grid.Row="1" Width="130" Height="130">
             <svg:SvgViewbox Source="pack://application:,,,/img/logo-laptop.svg"
@@ -51,5 +51,6 @@
         <Label Content="Please fill in the fields" HorizontalAlignment="Left" Margin="27,15,0,0" VerticalAlignment="Top"/>
         <Label Content="Please select a date" HorizontalAlignment="Left" Margin="486,15,0,0" VerticalAlignment="Top"/>
         <Label Content="Sum" HorizontalAlignment="Left" Margin="27,141,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.478,-0.071" Grid.RowSpan="2"/>
+        <Label Content="Your daily expense manager" HorizontalAlignment="Left" Margin="72,195,0,0" VerticalAlignment="Top" Grid.Row="1" FontSize="18" Foreground="#FF1F6A51"/>
     </Grid>
 </Window>
