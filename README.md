@@ -17,7 +17,7 @@
 
 📦 **Installation Instructions**
 
-1. Download the archive `CostCalculationVersion2_0_2.zip`  
+1. Download the archive `CostCalculationVersion2_0_3.zip`  
 2. Extract the contents to a folder of your choice  
 3. Run the application by executing `costCalculation.exe`  
 
