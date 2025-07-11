@@ -54,3 +54,4 @@
         <Label Content="Your daily expense manager" HorizontalAlignment="Left" Margin="72,195,0,0" VerticalAlignment="Top" Grid.Row="1" FontSize="18" Foreground="#FF1F6A51"/>
     </Grid>
 </Window>
+    

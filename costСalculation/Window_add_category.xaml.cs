@@ -81,21 +81,23 @@ namespace costСalculation
         {
             try
             {
-                WorkingWithCategories workingCateg = new WorkingWithCategories(CATEGORYLIST);
-                bool check = false;
-                workingCateg.ReturnCategoryMethod(comboBoxList.SelectedItem.ToString(), out check);
-                string msg = null;
-                Data.DeleteCategory(workingCateg.ReturnCategory, out msg);
-                if(msg=="")
+                if(CustomMessageBox.Show("Do you want to delete the selected category?", "Delete"))
                 {
+                    WorkingWithCategories workingCateg = new WorkingWithCategories(CATEGORYLIST);
+                    bool check = false;
+                    workingCateg.ReturnCategoryMethod(comboBoxList.SelectedItem.ToString(), out check);
+                    string msg = null;
+                    Data.DeleteCategory(workingCateg.ReturnCategory, out msg);
+                    if(msg=="")
+                    {
                         LoadCategoryInCombobox();
                         MessageBox.Show("Item deleted successfully");    
+                    }
+                    else
+                    {
+                        MessageBox.Show(msg);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show(msg);
-                }
-                
             }
             catch (Exception ex)
             {
@@ -108,10 +110,7 @@ namespace costСalculation
         {
             try
             {
-                if (MessageBox.Show("Do you want to edit the selected category?",
-                     "Edit",
-                     MessageBoxButton.YesNo,
-                     MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if(CustomMessageBox.Show("Do you want to edit the selected category?", "Edit"))
                 {
                     WorkingWithCategories categories = new WorkingWithCategories(CATEGORYLIST);
                     bool check = true;

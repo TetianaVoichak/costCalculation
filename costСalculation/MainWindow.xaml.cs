@@ -242,22 +242,21 @@ namespace costСalculation
         //edit current entry
         private void button_edit_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Do you want to edit the selected date?",
-                     "Edit",
-                     MessageBoxButton.YesNo,
-                     MessageBoxImage.Question) == MessageBoxResult.Yes)
+         
+            if(CustomMessageBox.Show("Edit the selected date?","Edit"))
             {
+                //User clicked "Yes"
                 textBox_total_amount.IsEnabled = true;
                 button_delete_category.IsEnabled = true;
                 button_save_edit.IsEnabled = true;
-
             }
             else
             {
+                //User clicked "No"
                 button_delete_category.IsEnabled = false;
                 button_save_edit.IsEnabled = false;
                 textBox_total_amount.IsEnabled = false;
-            }
+            }          
         }
 
         //determining which category is selected in order to change the data in the future
@@ -324,10 +323,7 @@ namespace costСalculation
         {
             try
             {
-                if (MessageBox.Show("Do you want to delete the selected date?",
-                      "Delete",
-                      MessageBoxButton.YesNo,
-                      MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if(CustomMessageBox.Show("Do you want to delete the selected date?", "Delete"))
                 {
                     if (comboBox_category_choose.Items.Count > 0)
                     {
@@ -359,10 +355,8 @@ namespace costСalculation
         {
             try
             {
-                if (MessageBox.Show("Do you want to remove the current category from the list?",
-                     "Delete  category",
-                     MessageBoxButton.YesNo,
-                     MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (CustomMessageBox.Show("Do you want to remove the current category from the list?",
+                     "Delete  category"))
                 {
                     if (comboBox_category_choose.Items.Count > 0)
                     {

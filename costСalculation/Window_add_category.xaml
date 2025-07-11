@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:costСalculation"
         mc:Ignorable="d"
-        Title="New category" Height="320" Width="400" Background="#EDF8F1" Closing="Window_Closing" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="New category" Height="320" Width="400" Background="#EDF8F1" WindowStyle="ToolWindow" Closing="Window_Closing" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Background="#EDF8F1" >
         <TextBox x:Name="textBox_new_category" Height="35" Margin="34,89,30,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Label Content="Input new category" Height="35" HorizontalAlignment="Left" Margin="31,10,0,0" VerticalAlignment="Top" />
