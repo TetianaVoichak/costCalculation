@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="New category" Height="320" Width="400" Background="#EDF8F1" WindowStyle="ToolWindow" Closing="Window_Closing" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Background="#EDF8F1" >
-        <TextBox x:Name="textBox_new_category" Height="35" Margin="34,89,30,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_new_category" Height="35" Margin="34,89,30,0" TextWrapping="Wrap" VerticalAlignment="Top" PreviewMouseDown="textBox_new_category_PreviewMouseDown"/>
         <Label Content="Input new category" Height="35" HorizontalAlignment="Left" Margin="31,10,0,0" VerticalAlignment="Top" />
         <Button x:Name="button_save_new"  Content="Save" Margin="34,135,30,0" VerticalAlignment="Top" Height="35" Click="button_save_new_Click" Background="#D5EBDD"/>
         <ComboBox x:Name="comboBoxList" Margin="34,41,30,0" VerticalAlignment="Top" SelectedIndex="0" Height="35" />

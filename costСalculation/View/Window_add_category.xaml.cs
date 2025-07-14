@@ -150,5 +150,17 @@ namespace costСalculation.View
                 MessageBox.Show(ex.Message.ToString());
             }
         }
+        void CleanTextBox(object sender)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox != null)
+            {
+                textBox.Clear();
+            }
+        }
+        private void textBox_new_category_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CleanTextBox(sender);
+        }
     }
 }

@@ -45,14 +45,8 @@ namespace costСalculation.BusinessLogic
 
         public void ReturnCategoryMethod(string categoryName, out bool check)
         {
-            check = false;
-            foreach (var a in categories)
-                if (categoryName == a.NameCategory)
-                {
-                    check = true;
-                    ReturnCategory = a;
-                    return;
-                }
+            ReturnCategory = categories.FirstOrDefault(a => a.NameCategory == categoryName);
+            check = ReturnCategory != null;
         }
 
         //the class ValidateTextBoxCategory checks for correctness of entered data,

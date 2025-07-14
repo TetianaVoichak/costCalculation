@@ -119,12 +119,6 @@ namespace costСalculation.View
                             money = 0;
                             MessageBox.Show("data saved successfully");
                         }
-                        else
-                        {
-                            MessageBox.Show("Invalid number format");
-                            money = 0;
-                        }
-
                     }
                     else
                     {

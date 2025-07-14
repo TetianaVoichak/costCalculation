@@ -34,16 +34,16 @@
         <TextBox x:Name="textBox_total_amount_this_day" HorizontalAlignment="Left" Margin="491,93,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Height="42" IsEnabled="False"/>
         <DatePicker x:Name="datePickerMain" HorizontalAlignment="Left" Margin="491,47,0,0" Width="274" VerticalAlignment="Top" SelectedDateChanged="datePickerMain_SelectedDateChanged" Language="en-US"  />
         <TextBox x:Name="textBox_total_amount" HorizontalAlignment="Left" Height="34" Margin="491,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" IsEnabled="False" PreviewMouseDown="textBox_total_amount_PreviewMouseDown"/>
-        <DatePicker x:Name="datePickerSetDate" HorizontalAlignment="Left" Margin="27,47,0,0" VerticalAlignment="Top" Width="274" Language="en-US" />
+        <DatePicker x:Name="datePickerSetDate" HorizontalAlignment="Left" Margin="27,47,0,0" VerticalAlignment="Top" Width="274" />
         <Label Content="Сategory" HorizontalAlignment="Left" Margin="27,72,0,0" VerticalAlignment="Top" Width="188"/>
         <Label Content="Сategory" HorizontalAlignment="Left" Margin="491,141,0,0" VerticalAlignment="Top" Width="188" Grid.RowSpan="2"/>
         <Label Content="how much did you spend in this category?" HorizontalAlignment="Left" Margin="491,72,0,0" VerticalAlignment="Top" Width="303"/>
         <Label Content="how much did you spend per day?" HorizontalAlignment="Left" Margin="491,65,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Button x:Name="button_add_new_category" Content="+ new category" HorizontalAlignment="Left" Margin="321,98,0,9" Width="92" Click="button_add_new_category_Click" Background="#D5EBDD"/>
         <Button x:Name="button_edit"  Content="Edit" HorizontalAlignment="Left" Background="#D5EBDD" Margin="833,24,0,59" Width="94" Cursor="" Click="button_edit_Click" Height="38"/>
-        <Button x:Name="button_save_edit" Content="Save" HorizontalAlignment="Left" Background="#D5EBDD" Margin="833,88,0,21" Width="94" Click="button_save_edit_Click" IsEnabled="False" RenderTransformOrigin="0.521,-1.174"/>
+        <Button x:Name="button_save_edit" Content="Save" HorizontalAlignment="Left" Background="#D5EBDD" Margin="833,85,0,24" Width="94" Click="button_save_edit_Click" IsEnabled="False" RenderTransformOrigin="0.521,-1.174"/>
         <Button x:Name="button_delete" Content="Delete" HorizontalAlignment="Left" Background="#D5EBDD" Height="38" Margin="833,36,0,0" Grid.Row="1" VerticalAlignment="Top" Width="94" Click="button_delete_Click"/>
-        <Button x:Name="button_delete_category" Content="Delete category" HorizontalAlignment="Left" Background="#D5EBDD" Margin="833,136,0,0" Width="94" Click="button_delete_category_Click" IsEnabled="False" Height="38" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Button x:Name="button_delete_category" Content="Delete category" HorizontalAlignment="Left" Background="#D5EBDD" Margin="833,135,0,0" Width="94" Click="button_delete_category_Click" IsEnabled="False" Height="38" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Label Content="Euro" HorizontalAlignment="Left" Margin="719,93,0,0" Grid.Row="1" VerticalAlignment="Top" Height="62" Width="68" FontSize="18"/>
         <Label Content="Euro" HorizontalAlignment="Left" Margin="719,99,0,0" VerticalAlignment="Top" Height="62" Width="68" FontSize="18" Grid.RowSpan="2"/>
         <Button x:Name="button_analytics" Content="Analytics" HorizontalAlignment="Left" Background="#D5EBDD" Height="38" Margin="833,83,0,0" Grid.Row="1" VerticalAlignment="Top" Width="94" Click="button_analytics_Click"/>
