@@ -41,9 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="View\" />
     <Folder Include="ViewModel\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +56,21 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\CustomMessageBox.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <Page Update="View\MainWindow.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <Page Update="View\WindowDiagram.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <Page Update="View\Window_add_category.xaml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
   </ItemGroup>
 
 </Project>

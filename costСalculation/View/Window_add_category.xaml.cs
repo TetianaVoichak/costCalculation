@@ -1,4 +1,5 @@
-﻿using System;
+﻿using costСalculation.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -9,8 +10,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using costСalculation.View;
+using costСalculation.Data;
+using costСalculation.BusinessLogic;
 
-namespace costСalculation
+namespace costСalculation.View
 {
     /// <summary>
     /// Interaction logic for Window_add_category.xaml
@@ -20,7 +24,7 @@ namespace costСalculation
         List<Category> listCategory = new List<Category>();
 
         //CATEGORYLIST stores all categories from the database
-        public List<Category> CATEGORYLIST { get; set; } = Data.GetCategories();
+        public List<Category> CATEGORYLIST { get; set; } = DataService.GetCategories();
         
         public Window_add_category()
         {
@@ -30,7 +34,7 @@ namespace costСalculation
 
        void LoadCategoryInCombobox()
         {
-            CATEGORYLIST  = Data.GetCategories();
+            CATEGORYLIST  = DataService.GetCategories();
             comboBoxList.Items.Clear();
             foreach (var a in CATEGORYLIST)
                 comboBoxList.Items.Add(a.NameCategory);
@@ -52,7 +56,7 @@ namespace costСalculation
                         return;
                     }
 
-                    Data.AddCategory(c, out mes);
+                    DataService.AddCategory(c, out mes);
                     if (mes != null) MessageBox.Show(mes);
                     else
                     {
@@ -87,7 +91,7 @@ namespace costСalculation
                     bool check = false;
                     workingCateg.ReturnCategoryMethod(comboBoxList.SelectedItem.ToString(), out check);
                     string msg = null;
-                    Data.DeleteCategory(workingCateg.ReturnCategory, out msg);
+                    DataService.DeleteCategory(workingCateg.ReturnCategory, out msg);
                     if(msg=="")
                     {
                         LoadCategoryInCombobox();
@@ -130,7 +134,7 @@ namespace costСalculation
                     }
                     string mes = null;
 
-                    Data.EditCategory(categories.ReturnCategory, textBox_new_category.Text, out mes);
+                    DataService.EditCategory(categories.ReturnCategory, textBox_new_category.Text, out mes);
                     if (mes == null)
                     {
                         LoadCategoryInCombobox();

@@ -4,7 +4,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace costСalculation
+namespace costСalculation.Models
 {
     //the class Category represents information about the category
     public class Category 

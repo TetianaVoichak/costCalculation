@@ -6,7 +6,7 @@ using System.Data.Entity.Core.Common;
 using System.Data.SQLite;
 using System.Data.SQLite.EF6;
 
-namespace costСalculation
+namespace costСalculation.Data
 {
     class SQLiteConfig : DbConfiguration
     {

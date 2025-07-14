@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace costСalculation
+namespace costСalculation.Models
 {
 
     //additional class InfoForDayAdditionalClass describing the entity InfoForDay from the table

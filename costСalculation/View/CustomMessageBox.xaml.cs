@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace costСalculation
+namespace costСalculation.View
 {
     /// <summary>
     /// Interaction logic for CustomMessageBox.xaml

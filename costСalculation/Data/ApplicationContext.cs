@@ -4,7 +4,7 @@ using System.Text;
 using System.Data.Entity;
 
 
-namespace costСalculation
+namespace costСalculation.Data
 {
     class ApplicationContext :DbContext
     {

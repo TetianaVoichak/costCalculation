@@ -14,8 +14,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
+using costСalculation.Models;
+using costСalculation.Data;
+using costСalculation.BusinessLogic;
 
-namespace costСalculation
+namespace costСalculation.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,10 +26,10 @@ namespace costСalculation
     public partial class MainWindow : Window
     {
         //CATEGORYLIST stores all categories from the database
-        public List<Category> CATEGORYLIST { get; set; } = Data.GetCategories();
+        public List<Category> CATEGORYLIST { get; set; } = DataService.GetCategories();
 
         //INFOFORDAYLIST stores all the information about days from the database
-        public List<InfoForDay> INFOFORDAYLIST { get; set; } = Data.GetInfoForDay();
+        public List<InfoForDay> INFOFORDAYLIST { get; set; } = DataService.GetInfoForDay();
 
         private DateTime? _initialDate;
         public MainWindow()
@@ -58,7 +61,7 @@ namespace costСalculation
         void LoadInfoForDay(DateTime date)
         {
             List<InfoForDay> listInfoForDayCurrent = new List<InfoForDay>();
-            INFOFORDAYLIST = Data.GetInfoForDay();
+            INFOFORDAYLIST = DataService.GetInfoForDay();
             listInfoForDayCurrent = costsOf.InfoCurrentDayListCategory(datePickerMain.SelectedDate.Value, INFOFORDAYLIST, CATEGORYLIST);
             InfoCurrentDayinForm(date, listInfoForDayCurrent);
         }
@@ -110,7 +113,7 @@ namespace costСalculation
                         if (money > 0)
                         {
                             InfoForDay info = new InfoForDay(datePickerSetDate.SelectedDate.Value, categForInfo, money);
-                            Data.AddInfo(info);
+                            DataService.AddInfo(info);
 
                             LoadInfoForDay(datePickerMain.SelectedDate.Value);
                             money = 0;
@@ -223,7 +226,7 @@ namespace costСalculation
 
         public void UpdateInfoInComboboxCategory()
         {
-            CATEGORYLIST = Data.GetCategories();
+            CATEGORYLIST = DataService.GetCategories();
             comboBox_category.Items.Clear();
             foreach (var a in CATEGORYLIST)
                 comboBox_category.Items.Add(a.NameCategory);
@@ -291,7 +294,7 @@ namespace costСalculation
                         if (money > 0)
                         {
                             InfoForDay info = new InfoForDay(datePickerMain.SelectedDate.Value, categForInfo, money);
-                            Data.EditInfo(info);
+                            DataService.EditInfo(info);
                             LoadInfoForDay(datePickerMain.SelectedDate.Value);
                             money = 0;
                             textBox_total_amount.IsEnabled = false;
@@ -331,7 +334,7 @@ namespace costСalculation
                         if (workingWithCategoryMethod(out categForInfo, comboBox_category_choose.SelectedItem.ToString()) == true)
                         {
                             InfoForDay info = new InfoForDay(datePickerMain.SelectedDate.Value, categForInfo, money);
-                            Data.DeleteDate(info);
+                            DataService.DeleteDate(info);
                             LoadInfoForDay(datePickerMain.SelectedDate.Value);
                             money = 0;
                             textBox_total_amount.IsEnabled = false;
@@ -367,7 +370,7 @@ namespace costСalculation
                             if (money > 0)
                             {
                                 InfoForDay info = new InfoForDay(datePickerMain.SelectedDate.Value, categForInfo, money);
-                                Data.DeleteCategoryFromDate(info, categForInfo);
+                                DataService.DeleteCategoryFromDate(info, categForInfo);
                                 LoadInfoForDay(datePickerMain.SelectedDate.Value);
                                 money = 0;
                                 textBox_total_amount.IsEnabled = false;

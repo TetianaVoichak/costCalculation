@@ -7,11 +7,12 @@ using System.Data.Entity;
 using System.Resources;
 using System.Windows.Interop;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using costСalculation.Models;
 
-namespace costСalculation
+namespace costСalculation.Data
 {
     //class Data is designed to work with the database
-    class Data
+    class DataService
     {
         //the method GetCategories gets a list of categories from the database
         public static List<Category> GetCategories()
@@ -24,7 +25,6 @@ namespace costСalculation
                     list.Add(c);
                 }
                 return list;
-
             }
         }
 
@@ -38,7 +38,6 @@ namespace costСalculation
                 return ctx.Categories.Any(c => c.NameCategory.ToLower() == categoryName.ToLower());
             }
         }
-
 
         //the method CheckCategory that calls a method to check if a category with the specified name exists
         //input parameter type Category
@@ -283,11 +282,3 @@ namespace costСalculation
 
     }
 }
-
-
-
-
-
-
-
-

@@ -6,8 +6,9 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.SQLite;
 using System.IO;
 using System.Data;
+using costСalculation.Models;
 
-namespace costСalculation
+namespace costСalculation.Data
 {
     //class DataContext manages the database connection, schema settings, and defines DbSets for tables
     public class DataContext : DbContext
@@ -26,7 +27,7 @@ namespace costСalculation
         {
             try
             {
-                this.Database.Connection.Open();
+                Database.Connection.Open();
             }
             catch (Exception ex)
             {
@@ -34,9 +35,9 @@ namespace costСalculation
             }
             finally
             {
-                if (this.Database.Connection.State == ConnectionState.Open)
+                if (Database.Connection.State == ConnectionState.Open)
                 {
-                    this.Database.Connection.Close();
+                    Database.Connection.Close();
                 }
             }
         }

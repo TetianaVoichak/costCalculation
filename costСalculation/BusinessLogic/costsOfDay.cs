@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Windows.Shell;
+using costСalculation.Models;
 
-namespace costСalculation
+namespace costСalculation.BusinessLogic
 {
     //class costOfDay that represents information about days and operations with it
     //Contains methods for processing the data
@@ -58,7 +59,7 @@ namespace costСalculation
             decimal amount = 0;
             foreach (var a in listforAmount)
             {
-                if (String.Equals(c.NameCategory.ToString(), a.Category1.NameCategory.ToString()))
+                if (string.Equals(c.NameCategory.ToString(), a.Category1.NameCategory.ToString()))
                     amount += a.Money;
             }
             return amount;

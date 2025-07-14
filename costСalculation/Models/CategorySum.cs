@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace costСalculation
+namespace costСalculation.Models
 {
     //CategorySum class that contains the CategoryId, Name, TotalSum and percent
     //for each category (used to plot the chart)

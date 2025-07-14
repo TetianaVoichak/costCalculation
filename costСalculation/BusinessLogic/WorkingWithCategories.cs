@@ -1,4 +1,4 @@
-﻿
+﻿using costСalculation.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Controls.Primitives;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace costСalculation
+namespace costСalculation.BusinessLogic
 {
     //the class WorkingWithCategories designed to work with categories
     class WorkingWithCategories

@@ -20,16 +20,19 @@ using LiveCharts.Definitions.Charts;
 using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
+using costСalculation.Models;
+using costСalculation.Data;
+using costСalculation.BusinessLogic;
 
-namespace costСalculation
+namespace costСalculation.View
 {
     /// <summary>
     /// Interaction logic for WindowDiagram.xaml
     /// </summary>
     public partial class WindowDiagram : Window
     {
-        public List<Category> CATEGORYLIST { get; set; } = Data.GetCategories();
-        public List<InfoForDay> INFOFORDAYLIST { get; set; } = Data.GetInfoForDay();
+        public List<Category> CATEGORYLIST { get; set; } = DataService.GetCategories();
+        public List<InfoForDay> INFOFORDAYLIST { get; set; } = DataService.GetInfoForDay();
         public Dictionary<int, string> MonthsDictionary { get; set; }
 
         public List<string> Labels { get; set; }
