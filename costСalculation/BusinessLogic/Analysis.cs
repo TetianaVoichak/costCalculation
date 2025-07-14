@@ -1,12 +1,11 @@
-﻿using costСalculation.BusinessLogic;
-using costСalculation.Models;
+﻿using costСalculation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace costСalculation
+namespace costСalculation.BusinessLogic
 {
     //class Analysis provides methods for working with data analytics, for future diagram
     internal static class Analysis
