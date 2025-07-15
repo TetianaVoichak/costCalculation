@@ -297,11 +297,6 @@ namespace costСalculation.View
 
                             MessageBox.Show("changes have been saved");
                         }
-                        else
-                        {
-                            MessageBox.Show("Invalid number format");
-                            money = 0;
-                        }
                     }
                     else
                     {
