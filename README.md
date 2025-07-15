@@ -4,7 +4,7 @@
 
 - C# / .NET  
 - WPF (Windows Presentation Foundation)  
-- LINQ  
+- Entity Framework  
 - SQLite as local database  
 
 🚀 **Features**
