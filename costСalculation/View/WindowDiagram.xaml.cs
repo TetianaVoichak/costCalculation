@@ -69,11 +69,9 @@ namespace costСalculation.View
 
                 List<InfoForDay> newList = new List<InfoForDay>();
 
-
                 FillingComboboxYearsMonths();
 
                 VisibilityDiagramAndRun();
-
 
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -86,7 +84,7 @@ namespace costСalculation.View
             foreach (var y in YEARS)
                 combobox_year.Items.Add(y);
 
-            if (YEARS.Count > 0) combobox_year.SelectedItem = YEARS[YEARS.Count - 1];
+            if (YEARS.Count > 0) combobox_year.SelectedItem = YEARS[0];
             if (MonthsDictionary.ContainsKey(DateTime.Now.Month))
             {
                 comboBox_months.SelectedItem = MonthsDictionary[DateTime.Now.Month];
@@ -167,8 +165,6 @@ namespace costСalculation.View
             DataContext = this;
         }
 
-
-
         void StartTheDiagram()
         {
             try
@@ -180,8 +176,8 @@ namespace costСalculation.View
                     int monthInt = resultKey.Key;
                     ShowDiagram(monthInt, Convert.ToInt32(combobox_year.SelectedValue));
                     decimal total = Analysis.TotalSumCategory(categorySum);
-                    string MonthStr = comboBox_months.Text;
-                    string YearStr = combobox_year.Text;
+                    string MonthStr = comboBox_months.SelectedItem.ToString();
+                    string YearStr = combobox_year.SelectedItem.ToString();
                     resultMoney.Content = $"Total cost for {MonthStr} {YearStr}:  {total:F2} euro";
                 }
 
@@ -211,8 +207,6 @@ namespace costСalculation.View
                 if (MonthsDictionary.ContainsKey(m))
                     comboBox_months.Items.Add(MonthsDictionary[m]);
             }
-
-
         }
 
         private void comboBox_months_SelectionChanged(object sender, SelectionChangedEventArgs e)
