@@ -84,10 +84,17 @@ namespace costСalculation.View
             foreach (var y in YEARS)
                 combobox_year.Items.Add(y);
 
-            if (YEARS.Count > 0) combobox_year.SelectedItem = YEARS[0];
-            if (MonthsDictionary.ContainsKey(DateTime.Now.Month))
+            if (YEARS.Count > 0)
             {
-                comboBox_months.SelectedItem = MonthsDictionary[DateTime.Now.Month];
+                
+                //Set the combo boxes to the most recent year and month
+                var lastDate = INFOFORDAYLIST.Max(info => info.Date);
+
+                int lastYear = lastDate.Year;
+                int lastMonth = lastDate.Month;
+                combobox_year.SelectedItem = lastYear;
+
+                comboBox_months.SelectedItem = lastMonth;
             }
         }
 
